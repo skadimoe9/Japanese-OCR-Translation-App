@@ -6,6 +6,11 @@ from PIL import Image
 from paddleocr import PaddleOCR, draw_ocr, PPStructure, draw_structure_result, save_structure_res
 from googletrans import Translator
 from sudachipy import tokenizer,dictionary
+from deep_translator import GoogleTranslator
+
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+
 
 ocr = PaddleOCR(use_angle_cls=True, 
                 lang='japan', 
@@ -32,19 +37,18 @@ def process_image(image_path):
     scores = [line[1][1] for line in result[0]]
 
     #translate a line
-    translator = Translator()
-    translated = [translator.translate(txt, dest='en').text for txt in txts]
+    translator = GoogleTranslator(source='auto', target='en')
+    translated = [translator.translate(txt) for txt in txts]
 
     #tokenize each word
 
     tokenizer_obj = dictionary.Dictionary(dict_type='full').create()
-    translator = Translator()
     mode = tokenizer.Tokenizer.SplitMode.B
     kks = pykakasi.kakasi()
 
     #version 1
     tokens = [[m.surface() for m in tokenizer_obj.tokenize(txt, mode)] for txt in txts]
-    translated_token = [[translator.translate(word, dest='en').text for word in token] for token in tokens]
+    translated_token = [[translator.translate(word) for word in token] for token in tokens]
     romaji = [[''.join([item['hepburn'] for item in kks.convert(word)]) for word in token] for token in tokens]
 
     result = list(zip(boxes, txts, translated, tokens, romaji, translated_token))
@@ -57,10 +61,3 @@ def process_image(image_path):
 image, df = process_image(IMAGE_PATH)
 
 print(df)
-
-
-
-
-
-
-    
