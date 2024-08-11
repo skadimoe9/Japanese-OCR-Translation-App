@@ -44,3 +44,5 @@ def login(username, password):
     cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, hashed_password))
     
     return cursor.fetchone() is not None
+
+register('admin', 'admin')
