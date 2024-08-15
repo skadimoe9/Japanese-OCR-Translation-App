@@ -18,9 +18,6 @@ ocr = PaddleOCR(use_angle_cls=True,
                 cls = True
 ) # need to run only once to download and load model into memory
 
-#IMAGE_PATH = "./data/b.jpg"
-IMAGE_PATH = "./data/w.jpg"
-
 def process_image(image_path):
     img = cv2.imread(image_path, cv2.IMREAD_COLOR)
 
@@ -58,6 +55,8 @@ def process_image(image_path):
 
 
 #example function used
+#IMAGE_PATH = "./data/b.jpg"
+IMAGE_PATH = "./data/w.jpg"
 image, df = process_image(IMAGE_PATH)
 
 print(df)
