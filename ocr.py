@@ -58,10 +58,6 @@ def process_image(image_path):
 #example function used
 #IMAGE_PATH = "./data/b.jpg"
 IMAGE_PATH = "./data/w.jpg"
-<<<<<<<< HEAD:ocr.py
-
-========
->>>>>>>> b62b081edcf3b21acfe8f9b81a38687e2f4808dc:cam.py
 image, df = process_image(IMAGE_PATH)
 
 print(df)
