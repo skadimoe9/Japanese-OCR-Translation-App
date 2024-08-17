@@ -1,11 +1,7 @@
 import cv2
-import numpy as np
 import pandas as pd
-import matplotlib
 import pykakasi
-from PIL import Image
 from paddleocr import PaddleOCR, draw_ocr, PPStructure, draw_structure_result, save_structure_res
-from googletrans import Translator
 from sudachipy import tokenizer,dictionary
 from deep_translator import GoogleTranslator
 

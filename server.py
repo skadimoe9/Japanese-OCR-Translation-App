@@ -1,7 +1,7 @@
 import sqlite3
 import hashlib
 import socket
-import threading
+from datetime import datetime
 
 # Connect to SQLite database (or create it if it doesn't exist)
 conn = sqlite3.connect('users.db')
@@ -15,6 +15,18 @@ CREATE TABLE IF NOT EXISTS users (
     password TEXT NOT NULL
 )
 ''')
+
+# Create daily_data table
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS daily_data (
+        user_id INTEGER,
+        date DATE,
+        data_value REAL,
+        PRIMARY KEY (user_id, date),
+        FOREIGN KEY (user_id) REFERENCES users (user_id)
+    )
+''')
+
 conn.commit()
 conn.close()
 
@@ -45,4 +57,24 @@ def login(username, password):
     
     return cursor.fetchone() is not None
 
-register('admin', 'admin')
+def update_daily_data(username, data_date, data_value):
+    cursor.execute('SELECT user_id FROM users WHERE username = ?', (username,))
+    user_id = cursor.fetchone()
+    if user_id:
+        cursor.execute('''
+            INSERT OR REPLACE INTO daily_data (user_id, date, data_value)
+            VALUES (?, ?, ?)
+        ''', (user_id[0], data_date, data_value))
+        conn.commit()
+    else:
+        print(f"User {username} not found.")
+
+def get_daily_data(username):
+    cursor.execute('''
+        SELECT u.username, d.date, d.data_value 
+        FROM daily_data d
+        JOIN users u ON d.user_id = u.user_id
+        WHERE u.username = ?
+        ORDER BY d.date
+    ''', (username,))
+    return cursor.fetchall()
