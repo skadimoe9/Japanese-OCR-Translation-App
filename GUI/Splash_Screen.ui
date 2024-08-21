@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>598</width>
-    <height>302</height>
+    <width>603</width>
+    <height>297</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,9 +38,12 @@
         <height>16777215</height>
        </size>
       </property>
+      <property name="cursor">
+       <cursorShape>ArrowCursor</cursorShape>
+      </property>
       <property name="styleSheet">
        <string notr="true">QFrame{
-background-color: rgb(211, 205, 184);
+background-color: rgba(133, 133, 133,1);
 border-radius : 20px;
 }</string>
       </property>
@@ -66,7 +69,8 @@ border-radius : 20px;
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgba(211, 205, 184,0);</string>
+        <string notr="true">background-color: rgba(211, 205, 184,0);
+color :rgb(255,255,255);</string>
        </property>
        <property name="text">
         <string>&lt;Strong&gt; Learn &lt;/Strong&gt; Kanji</string>
@@ -91,58 +95,14 @@ border-radius : 20px;
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgba(211, 205, 184,0);</string>
+        <string notr="true">background-color: rgba(211, 205, 184,0);
+color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
         <string>&lt;Strong&gt; OCR &lt;/Strong&gt; Learning App</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="Image">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>171</width>
-         <height>281</height>
-        </rect>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">#Image{
-    background-color: rgba(255, 255, 255, 0.3); /* Background putih dengan 70% opacity */
-	background-image: url(:/newPrefix/Snipaste_2024-08-09_15-29-51.png);
-    background-repeat: no-repeat;
-	background-position : center center;
-    background-size: contain; /* Mengatur ukuran gambar agar tidak terlalu besar */
-    border-radius: 20px; /* Radius 20px pada semua sudut */
-}
-</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::Box</enum>
-       </property>
-       <property name="lineWidth">
-        <number>0</number>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::AutoText</enum>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-       <property name="wordWrap">
-        <bool>false</bool>
        </property>
       </widget>
       <widget class="QProgressBar" name="progressBar">
@@ -157,13 +117,13 @@ border-radius : 20px;
        <property name="styleSheet">
         <string notr="true">QProgressBar{
 	background-color: rgba(114, 123, 124,0.5);
-	color: rgb(227, 220, 200);
+   color :rgb(154, 157, 158);
     text-align : center;
     border-radius : 10px;
 }
 QProgressBar::chunk{
 	border-radius : 8px;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0.459909, x2:1, y2:0.482955, stop:0 rgba(220, 149, 149, 255), stop:0.909091 rgba(231, 226, 210, 255));
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(202, 176, 177, 255), stop:1 rgba(222, 222, 222, 255));
 }
 </string>
        </property>
@@ -193,7 +153,8 @@ QProgressBar::chunk{
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgba(211, 205, 184,0);</string>
+        <string notr="true">background-color: rgba(211, 205, 184,0);
+color : rgba(255,255,255,0.6);</string>
        </property>
        <property name="text">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:7pt;&quot;&gt;Loading ..&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -230,7 +191,9 @@ QProgressBar::chunk{
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgba(211, 205, 184,0);</string>
+        <string notr="true">background-color: rgba(211, 205, 184,0);
+color : rgba(255,255,255,0.6);
+</string>
        </property>
        <property name="text">
         <string>&lt;Strong&gt;Created by&lt;/Strong&gt; Dicky,F4TH,DADO</string>
@@ -243,6 +206,23 @@ QProgressBar::chunk{
        </property>
        <property name="indent">
         <number>2</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>181</width>
+         <height>281</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border-image: url(:/newPrefix/14546211_rm127-tang-16b-japaneseframe.jpg);
+border-radius:20px;</string>
+       </property>
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </widget>

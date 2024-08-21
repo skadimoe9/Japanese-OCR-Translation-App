@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_SplashScreen(object):
     def setupUi(self, SplashScreen):
         SplashScreen.setObjectName("SplashScreen")
-        SplashScreen.resize(598, 302)
+        SplashScreen.resize(603, 297)
         self.centralwidget = QtWidgets.QWidget(SplashScreen)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -24,8 +24,9 @@ class Ui_SplashScreen(object):
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setEnabled(True)
         self.frame.setMaximumSize(QtCore.QSize(661, 16777215))
+        self.frame.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.frame.setStyleSheet("QFrame{\n"
-"background-color: rgb(211, 205, 184);\n"
+"background-color: rgba(133, 133, 133,1);\n"
 "border-radius : 20px;\n"
 "}")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -37,7 +38,8 @@ class Ui_SplashScreen(object):
         font.setFamily("Monotxt")
         font.setPointSize(27)
         self.Ttile.setFont(font)
-        self.Ttile.setStyleSheet("background-color: rgba(211, 205, 184,0);")
+        self.Ttile.setStyleSheet("background-color: rgba(211, 205, 184,0);\n"
+"color :rgb(255,255,255);")
         self.Ttile.setAlignment(QtCore.Qt.AlignCenter)
         self.Ttile.setObjectName("Ttile")
         self.Description = QtWidgets.QLabel(self.frame)
@@ -46,40 +48,21 @@ class Ui_SplashScreen(object):
         font.setFamily("Monotxt")
         font.setPointSize(15)
         self.Description.setFont(font)
-        self.Description.setStyleSheet("background-color: rgba(211, 205, 184,0);")
+        self.Description.setStyleSheet("background-color: rgba(211, 205, 184,0);\n"
+"color: rgb(255, 255, 255);")
         self.Description.setAlignment(QtCore.Qt.AlignCenter)
         self.Description.setObjectName("Description")
-        self.Image = QtWidgets.QLabel(self.frame)
-        self.Image.setGeometry(QtCore.QRect(0, 0, 171, 281))
-        self.Image.setAutoFillBackground(False)
-        self.Image.setStyleSheet("#Image{\n"
-"    background-color: rgba(255, 255, 255, 0.3); /* Background putih dengan 70% opacity */\n"
-"    background-image: url(:/newPrefix/Snipaste_2024-08-09_15-29-51.png);\n"
-"    background-repeat: no-repeat;\n"
-"    background-position : center center;\n"
-"    background-size: contain; /* Mengatur ukuran gambar agar tidak terlalu besar */\n"
-"    border-radius: 20px; /* Radius 20px pada semua sudut */\n"
-"}\n"
-"")
-        self.Image.setFrameShape(QtWidgets.QFrame.Box)
-        self.Image.setLineWidth(0)
-        self.Image.setText("")
-        self.Image.setTextFormat(QtCore.Qt.AutoText)
-        self.Image.setScaledContents(False)
-        self.Image.setAlignment(QtCore.Qt.AlignCenter)
-        self.Image.setWordWrap(False)
-        self.Image.setObjectName("Image")
         self.progressBar = QtWidgets.QProgressBar(self.frame)
         self.progressBar.setGeometry(QtCore.QRect(200, 170, 341, 23))
         self.progressBar.setStyleSheet("QProgressBar{\n"
 "    background-color: rgba(114, 123, 124,0.5);\n"
-"    color: rgb(227, 220, 200);\n"
+"   color :rgb(154, 157, 158);\n"
 "    text-align : center;\n"
 "    border-radius : 10px;\n"
 "}\n"
 "QProgressBar::chunk{\n"
 "    border-radius : 8px;\n"
-"    background-color: qlineargradient(spread:pad, x1:0, y1:0.459909, x2:1, y2:0.482955, stop:0 rgba(220, 149, 149, 255), stop:0.909091 rgba(231, 226, 210, 255));\n"
+"    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(202, 176, 177, 255), stop:1 rgba(222, 222, 222, 255));\n"
 "}\n"
 "")
         self.progressBar.setProperty("value", 24)
@@ -94,7 +77,8 @@ class Ui_SplashScreen(object):
         font.setKerning(True)
         self.Loading.setFont(font)
         self.Loading.setAutoFillBackground(False)
-        self.Loading.setStyleSheet("background-color: rgba(211, 205, 184,0);")
+        self.Loading.setStyleSheet("background-color: rgba(211, 205, 184,0);\n"
+"color : rgba(255,255,255,0.6);")
         self.Loading.setAlignment(QtCore.Qt.AlignCenter)
         self.Loading.setWordWrap(True)
         self.Loading.setIndent(2)
@@ -109,11 +93,19 @@ class Ui_SplashScreen(object):
         font.setKerning(True)
         self.label_5.setFont(font)
         self.label_5.setAutoFillBackground(False)
-        self.label_5.setStyleSheet("background-color: rgba(211, 205, 184,0);")
+        self.label_5.setStyleSheet("background-color: rgba(211, 205, 184,0);\n"
+"color : rgba(255,255,255,0.6);\n"
+"")
         self.label_5.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_5.setWordWrap(True)
         self.label_5.setIndent(2)
         self.label_5.setObjectName("label_5")
+        self.label = QtWidgets.QLabel(self.frame)
+        self.label.setGeometry(QtCore.QRect(0, 0, 181, 281))
+        self.label.setStyleSheet("border-image: url(:/newPrefix/14546211_rm127-tang-16b-japaneseframe.jpg);\n"
+"border-radius:20px;")
+        self.label.setText("")
+        self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.frame)
         SplashScreen.setCentralWidget(self.centralwidget)
 
