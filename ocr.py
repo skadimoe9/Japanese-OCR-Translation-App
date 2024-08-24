@@ -12,12 +12,10 @@ from deep_translator import GoogleTranslator
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 
-
 ocr = PaddleOCR(use_angle_cls=True, 
                 lang='japan', 
                 use_space_char = True, 
-                cls = True
-) # need to run only once to download and load model into memory
+                cls = True)
 
 def process_image(image_path):
     img = cv2.imread(image_path, cv2.IMREAD_COLOR)
