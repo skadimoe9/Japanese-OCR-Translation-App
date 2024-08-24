@@ -11,6 +11,7 @@ contourpy==1.2.1
 cycler==0.12.1
 Cython==3.0.10
 decorator==5.1.1
+deep-translator==1.11.4
 Deprecated==1.2.14
 dill==0.3.8
 fire==0.6.0
@@ -39,6 +40,7 @@ networkx==3.3
 numpy==1.26.4
 opencv-contrib-python==4.10.0.84
 opencv-python==4.10.0.84
+opencv-python-headless==4.10.0.84
 opt-einsum==3.3.0
 packaging==24.1
 paddleocr==2.8.1
