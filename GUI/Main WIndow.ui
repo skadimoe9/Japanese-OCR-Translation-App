@@ -94,7 +94,7 @@ background-color: rgb(255, 255, 255);
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap>C:/Users/User/Downloads/Vector.png</pixmap>
+             <pixmap resource="Main Window.qrc">:/newPrefix/Vector.png</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
@@ -195,8 +195,8 @@ QPushButton:hover{
              <string>Upload File</string>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>file.png</normaloff>file.png</iconset>
+             <iconset resource="Main Window.qrc">
+              <normaloff>:/newPrefix/file.png</normaloff>:/newPrefix/file.png</iconset>
             </property>
            </widget>
           </item>
@@ -277,8 +277,8 @@ border-radius: 10px</string>
              <string>Open Camera</string>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>cam.png</normaloff>cam.png</iconset>
+             <iconset resource="Main Window.qrc">
+              <normaloff>:/newPrefix/cam.png</normaloff>:/newPrefix/cam.png</iconset>
             </property>
            </widget>
           </item>
@@ -353,6 +353,8 @@ border-radius: 10px</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="Main Window.qrc"/>
+ </resources>
  <connections/>
 </ui>
