@@ -83,11 +83,10 @@ class Login(QWidget):
         self.socialWindow.show()
         print("Social Window should be visible now")  # Debugging Statement
         self.close()
+        self.emailfield =QLineEdit(self)
+        self.emailfield.setPlaceholderText("Username")
     
-    self.emailfield =QLineEdit(self)
-    self.emailfield.setPlaceholderText("Username")
-    
-    def loginfunction(self)
+    def loginfunction(self):
         username = self.emailfield.text()
         password = self.passwordfield.text()
     
