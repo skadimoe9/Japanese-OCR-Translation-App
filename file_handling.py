@@ -30,20 +30,31 @@ def capture_picture():
             print("Error: Could not read frame.")
             break
 
-        text = "Press 'c' to capture picture"
+        text = "Press 'c' to capture picture or 'q' to quit"
         cv2.putText(frame, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
         cv2.imshow("Camera", frame)
+
         if cv2.waitKey(1) & 0xFF == ord('c'):
             filename = f"captured_image_{int(time.time())}.jpg"
             cv2.imwrite("./data/" + filename, frame)
             print(f"Picture saved as {filename}")
-            break
+            cap.release()
+            return filename
+        
+        elif cv2.waitKey(1) & 0xFF == ord('q'):
+            return False
+        
+            
     
-    cap.release()
-    return filename
+    
 
 # Example usage
-#x = capture_picture()
+x = capture_picture()
+
+if x:
+    print(f"Picture saved as {x}")
+else:
+    print("Picture capture cancelled.")
 
     
