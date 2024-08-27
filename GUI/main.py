@@ -2,13 +2,12 @@ import sys
 from PyQt5 import QtCore
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsDropShadowEffect, QWidget
-from server import register, login
 
 # --> Splash Screen
 from Splash_Screen import Ui_SplashScreen
 from Login import Ui_Login
 from Register import Ui_Register
-from Social import Ui_Social
+from Social import Ui_Social # Social
 
 # --> Global
 counter = 0
@@ -82,13 +81,8 @@ class Login(QWidget):
         self.socialWindow = Social()  # Menginisialisasi kelas Social
         self.socialWindow.show()
         print("Social Window should be visible now")  # Debugging Statement
-<<<<<<< HEAD
         self.close() 
         self.emailfield = QLineEdit(self) 
-=======
-        self.close()
-        self.emailfield =QLineEdit(self)
->>>>>>> e7ce6608d86c28bf6b0feef8e26a510a2645b0cc
         self.emailfield.setPlaceholderText("Username")
     
     def loginfunction(self):
