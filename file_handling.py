@@ -38,7 +38,6 @@ def capture_picture():
         if cv2.waitKey(1) & 0xFF == ord('c'):
             filename = f"captured_image_{int(time.time())}.jpg"
             cv2.imwrite("./data/" + filename, frame)
-            print(f"Picture saved as {filename}")
             cap.release()
             return filename
         
