@@ -1,6 +1,7 @@
 import shutil
 import cv2
 import time
+import matplotlib.pyplot as plt
 
 def copy_file(source_path, destination_path):
     try:
@@ -43,17 +44,28 @@ def capture_picture():
         
         elif cv2.waitKey(1) & 0xFF == ord('q'):
             return False
-        
-            
-    
-    
 
 # Example usage
-x = capture_picture()
+#x = capture_picture()
+#if x:
+#    print(f"Picture saved as {x}")
+#else:
+#    print("Picture capture cancelled.")
 
-if x:
-    print(f"Picture saved as {x}")
-else:
-    print("Picture capture cancelled.")
+def create_bar_graph(x,y):
+
+    # Create bar graph
+    plt.bar(x, y)
+
+    # Add title and labels
+    plt.title("Bar Graph")
+    plt.xlabel("X-axis")
+    plt.ylabel("Y-axis")
+
+    # Save the graph
+    filename = "datalog.png"
+    plt.savefig("./graph/" + filename)
+
+    return filename
 
     
