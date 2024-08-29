@@ -4,7 +4,7 @@ import pandas as pd
 import pykakasi
 from PIL import Image, ImageDraw, ImageFont
 import datetime
-from paddleocr import PaddleOCR, draw_ocr, PPStructure, draw_structure_result, save_structure_res
+from paddleocr import PaddleOCR
 from sudachipy import tokenizer,dictionary
 from deep_translator import GoogleTranslator
 
@@ -51,27 +51,39 @@ def process_image(image_path):
 
     df = pd.DataFrame(result, columns=['Box','Japanese','Translated','Tokens','Romaji','Translated_Tokens'])
     
-    return resized,df
+    return df
 
 def draw_translated_text(image_path, df): # Fitur add text translate ke gambar, masih dalam pengembangan tapi fungsional
     # load gambar
     image = Image.open(image_path)
     draw = ImageDraw.Draw(image)
     
-    # define font, bebas font apa, ini pake default dr pillow library
-    font = ImageFont.truetype("arial.ttf", 25)
     
     # ambil box buat koordinat sama text translatenya
     for index, row in df.iterrows():
         box = row['Box']
         translated_text = row['Translated']
-        print(f"Row {index}: box={box}")
         
          # ada beberapa bagian text yang bakal none, jadi diskip aja karena bikin error
         if translated_text is None:
-            print(f"Skipping row {index} because translated_text is None")
             continue
+
+        # define font, bebas font apa, ini pake default dr pillow library
+        font_size = 100
+        font_path = "arial.ttf"
+        font = ImageFont.truetype(font_path, font_size)
         
+        # Kurangi font size sampai text muat ke box
+        box_width = box[1][0] - box[0][0]
+        box_height = box[2][1] - box[1][1]
+        
+        while True:
+            bbox = font.getbbox(translated_text)
+            if bbox[2] <= box_width and bbox[3] <= box_height:
+                break
+            font_size -= 1
+            font = ImageFont.truetype(font_path, font_size)
+
         # gambar text dan textbox
         left, top, right, bottom = draw.textbbox(box[0], translated_text, font=font)
         draw.rectangle((left-5, top-5, right+5, bottom+5), fill="white") 
@@ -95,8 +107,8 @@ def draw_translated_text(image_path, df): # Fitur add text translate ke gambar, 
 
 #example function used
 #IMAGE_PATH = "./data/b.jpg"
-IMAGE_PATH = "./data/y.jpg"
-image, df = process_image(IMAGE_PATH)
+IMAGE_PATH = "./data/w.jpg"
+df = process_image(IMAGE_PATH)
 
 print(df)
 draw_translated_text(IMAGE_PATH, df)
