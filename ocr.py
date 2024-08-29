@@ -53,7 +53,7 @@ def process_image(image_path):
     
     return resized,df
 
-def draw_translated_text(image_path, df): # Fitur add text translate ke gambar, tinggal kasih textbox
+def draw_translated_text(image_path, df): # Fitur add text translate ke gambar, masih dalam pengembangan tapi fungsional
     # load gambar
     image = Image.open(image_path)
     draw = ImageDraw.Draw(image)
@@ -67,13 +67,14 @@ def draw_translated_text(image_path, df): # Fitur add text translate ke gambar, 
         translated_text = row['Translated']
         print(f"Row {index}: box={box}")
         
-         # Check if translated_text is None
+         # ada beberapa bagian text yang bakal none, jadi diskip aja karena bikin error
         if translated_text is None:
             print(f"Skipping row {index} because translated_text is None")
             continue
         
-        # Calculate the position to draw the text
-
+        # gambar text dan textbox
+        left, top, right, bottom = draw.textbbox(box[0], translated_text, font=font)
+        draw.rectangle((left-5, top-5, right+5, bottom+5), fill="white") 
         draw.text(box[0], translated_text, fill="white", font=font, stroke_width=2, stroke_fill="black")
     
     # buat generate filename
@@ -94,7 +95,7 @@ def draw_translated_text(image_path, df): # Fitur add text translate ke gambar, 
 
 #example function used
 #IMAGE_PATH = "./data/b.jpg"
-IMAGE_PATH = "./data/w.jpg"
+IMAGE_PATH = "./data/y.jpg"
 image, df = process_image(IMAGE_PATH)
 
 print(df)
