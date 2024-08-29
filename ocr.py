@@ -30,6 +30,7 @@ def process_image(image_path):
     boxes = [line[0] for line in result[0]]
     txts = [line[1][0] for line in result[0]]
     scores = [line[1][1] for line in result[0]]
+    boxes_actual = [[(int(x/4), int(y/4)) for (x, y) in box] for box in boxes] # real size coordinate
 
     #translate a line
     translator = GoogleTranslator(source='auto', target='en')
@@ -46,18 +47,19 @@ def process_image(image_path):
     translated_token = [[translator.translate(word) for word in token] for token in tokens]
     romaji = [[''.join([item['hepburn'] for item in kks.convert(word)]) for word in token] for token in tokens]
 
-    result = list(zip(boxes, txts, translated, tokens, romaji, translated_token))
+    result = list(zip(boxes_actual, txts, translated, tokens, romaji, translated_token))
+
     df = pd.DataFrame(result, columns=['Box','Japanese','Translated','Tokens','Romaji','Translated_Tokens'])
     
     return resized,df
 
-def draw_translated_text(image_path, df): # Masih proses buat overwrite teks jepang ke inggris di gambar
+def draw_translated_text(image_path, df): # Fitur add text translate ke gambar, tinggal kasih textbox
     # load gambar
     image = Image.open(image_path)
     draw = ImageDraw.Draw(image)
     
     # define font, bebas font apa, ini pake default dr pillow library
-    font = ImageFont.truetype("./data/arial.ttf", size=500)
+    font = ImageFont.truetype("arial.ttf", 25)
     
     # ambil box buat koordinat sama text translatenya
     for index, row in df.iterrows():
@@ -72,8 +74,7 @@ def draw_translated_text(image_path, df): # Masih proses buat overwrite teks jep
         
         # Calculate the position to draw the text
 
-        draw.text(box[1], translated_text, fill="black", font=font)
-        
+        draw.text(box[0], translated_text, fill="white", font=font, stroke_width=2, stroke_fill="black")
     
     # buat generate filename
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -94,8 +95,7 @@ def draw_translated_text(image_path, df): # Masih proses buat overwrite teks jep
 #example function used
 #IMAGE_PATH = "./data/b.jpg"
 IMAGE_PATH = "./data/w.jpg"
-OUTPUT_PATH = ""
 image, df = process_image(IMAGE_PATH)
 
 print(df)
-#draw_translated_text(IMAGE_PATH, df)
+draw_translated_text(IMAGE_PATH, df)
