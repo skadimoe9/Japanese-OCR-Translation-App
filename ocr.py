@@ -69,7 +69,8 @@ def draw_translated_text(image_path, df): # Fitur add text translate ke gambar, 
             continue
 
         # define font, bebas font apa, ini pake arial 
-        font_size = 100
+        font_size = 200
+        min_font_size = 1
         font_path = "arial.ttf"
         font = ImageFont.truetype(font_path, font_size)
         
@@ -84,6 +85,8 @@ def draw_translated_text(image_path, df): # Fitur add text translate ke gambar, 
             if bbox_width <= box_width and bbox_height <= box_height:
                 break
             font_size -= 1
+            if font_size < min_font_size:
+                font_size = 25
             font = ImageFont.truetype(font_path, font_size)
 
         # gambar text dan textbox
@@ -102,14 +105,17 @@ def draw_translated_text(image_path, df): # Fitur add text translate ke gambar, 
     # full path buat output directory
     full_path = os.path.join(output_dir, unique_filename)
     
+    if image.mode == 'RGBA':
+        image = image.convert('RGB')
+    
     # save file
-    image.save(full_path)
+    image.save(full_path, format="JPEG")
     image.show()
 
 
 #example function used
 #IMAGE_PATH = "./data/b.jpg"
-IMAGE_PATH = "./data/y.jpg"
+IMAGE_PATH = "./data/irodori2.png"
 df = process_image(IMAGE_PATH)
 
 print(df)
