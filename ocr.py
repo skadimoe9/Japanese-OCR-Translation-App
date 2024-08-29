@@ -1,6 +1,9 @@
 import cv2
+import os
 import pandas as pd
 import pykakasi
+from PIL import Image, ImageDraw, ImageFont
+import datetime
 from paddleocr import PaddleOCR, draw_ocr, PPStructure, draw_structure_result, save_structure_res
 from sudachipy import tokenizer,dictionary
 from deep_translator import GoogleTranslator
@@ -48,10 +51,51 @@ def process_image(image_path):
     
     return resized,df
 
+def draw_translated_text(image_path, df): # Masih proses buat overwrite teks jepang ke inggris di gambar
+    # load gambar
+    image = Image.open(image_path)
+    draw = ImageDraw.Draw(image)
+    
+    # define font, bebas font apa, ini pake default dr pillow library
+    font = ImageFont.truetype("./data/arial.ttf", size=500)
+    
+    # ambil box buat koordinat sama text translatenya
+    for index, row in df.iterrows():
+        box = row['Box']
+        translated_text = row['Translated']
+        print(f"Row {index}: box={box}")
+        
+         # Check if translated_text is None
+        if translated_text is None:
+            print(f"Skipping row {index} because translated_text is None")
+            continue
+        
+        # Calculate the position to draw the text
+
+        draw.text(box[1], translated_text, fill="black", font=font)
+        
+    
+    # buat generate filename
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    unique_filename = f"translated_image_{timestamp}.jpg"
+    
+    # buat output directory untuk save file
+    output_dir = "out_image"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # full path buat output directory
+    full_path = os.path.join(output_dir, unique_filename)
+    
+    # save file
+    image.save(full_path)
+    image.show()
+
 
 #example function used
 #IMAGE_PATH = "./data/b.jpg"
 IMAGE_PATH = "./data/w.jpg"
+OUTPUT_PATH = ""
 image, df = process_image(IMAGE_PATH)
 
 print(df)
+#draw_translated_text(IMAGE_PATH, df)
