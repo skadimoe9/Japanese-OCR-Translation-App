@@ -115,7 +115,7 @@ def draw_translated_text(image_path, df): # Fitur add text translate ke gambar, 
 
 #example function used
 #IMAGE_PATH = "./data/b.jpg"
-IMAGE_PATH = "./data/irodori2.png"
+IMAGE_PATH = "./data/y.jpg"
 df = process_image(IMAGE_PATH)
 
 print(df)
