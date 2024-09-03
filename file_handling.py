@@ -43,6 +43,7 @@ def capture_picture():
             return filename
         
         elif cv2.waitKey(1) & 0xFF == ord('q'):
+            cv2.destroyAllWindows()
             return False
 
 # Example usage
