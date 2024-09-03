@@ -2,6 +2,7 @@ import shutil
 import cv2
 import time
 import matplotlib.pyplot as plt
+import os
 
 def copy_file(source_path, destination_path):
     try:
@@ -26,6 +27,10 @@ def capture_picture():
 
     #open camera view
     while True:
+        # buat output directory untuk save file
+        output_dir = "data"
+        os.makedirs(output_dir, exist_ok=True)
+    
         ret, frame = cap.read()
         if not ret:
             print("Error: Could not read frame.")
@@ -55,6 +60,10 @@ def capture_picture():
 
 def create_bar_graph(x,y):
 
+    # buat output directory untuk save file
+    output_dir = "graph"
+    os.makedirs(output_dir, exist_ok=True)
+
     # Create bar graph
     plt.bar(x, y)
 
@@ -69,4 +78,24 @@ def create_bar_graph(x,y):
 
     return filename
 
-    
+def delete_file():
+    # Delete files inside data folder
+    data_dir = "data"
+    for file in os.listdir(data_dir):
+        file_path = os.path.join(data_dir, file)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
+    # Delete files inside graph folder
+    graph_dir = "graph"
+    for file in os.listdir(graph_dir):
+        file_path = os.path.join(graph_dir, file)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
+    # Delete files inside out_image folder
+    out_image_dir = "out_image"
+    for file in os.listdir(out_image_dir):
+        file_path = os.path.join(out_image_dir, file)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
