@@ -45,7 +45,7 @@ def register(username, password):
         return False
 
 #usage example
-#status = register('admin', 'admin')
+#status = register('admin1', 'admin1')
 #print(status)
 
 
@@ -89,7 +89,7 @@ def get_daily_data(username):
     cursor.execute('''
         SELECT u.username, d.date, d.data_value 
         FROM daily_data d
-        JOIN users u ON d.user_id = u.user_id
+        JOIN users u ON d.user_id = u.id
         WHERE u.username = ?
         ORDER BY d.date
     ''', (username,))

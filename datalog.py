@@ -33,14 +33,16 @@ characters, tstamps = separate_and_count_characters(df2)
 print("Translation Counts:", characters)
 print("Timestamps:", tstamps)
 
-if (update_daily_data('admin', tstamps, characters)):
+try: 
+    update_daily_data('admin1', tstamps, characters)
     print("Data has been updated successfully.")
-else:
-    print("Data update failed.")
+except:
+    print("Error updating data.")
+
 
 delete_saved_image(delete_path)
 
-x, y = fetch_graphing_data()
+x, y = fetch_graphing_data("admin1")
 print(x, y)
 filename_graph = create_bar_graph(x, y)
 print(f"Graph {filename_graph} printed successfully")

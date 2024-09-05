@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import mplcursors
 import sqlite3
 import os 
+from server import get_daily_data
 import numpy as np
 
 def copy_file(source_path, destination_path):
@@ -71,8 +72,8 @@ def create_bar_graph(x,y):
     os.makedirs(output_dir, exist_ok=True)
 
     # Create bar graph
-    plt.figure(figsize=(10, 5))
-    bars = plt.bar(x, y, color='red')
+    plt.figure(figsize=(8, 4))
+    bars = plt.bar(x, y, color='red', width=0.5)
 
     # Add title and labels
     plt.title("Kanji App Used")
@@ -112,21 +113,20 @@ def delete_file():
         if os.path.isfile(file_path):
             os.remove(file_path)
 
-def fetch_graphing_data():
+def fetch_graphing_data(username):
     # Connect to the SQLite database
     conn = sqlite3.connect('account_database.db')
     cursor = conn.cursor()
     
     # Execute the query to fetch date and data_value columns
-    cursor.execute("SELECT date, data_value FROM daily_data")
-    rows = cursor.fetchall()
+    rows = get_daily_data(username)
     
     # Close the database connection
     conn.close()
     
     # Separate the fetched data into two lists
-    dates = [row[0] for row in rows]
-    data_values = [row[1] for row in rows]
+    dates = [row[1] for row in rows]
+    data_values = [row[2] for row in rows]
     
     # Convert the lists to NumPy arrays
     dates_array = np.array(dates)
