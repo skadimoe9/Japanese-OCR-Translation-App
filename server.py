@@ -39,16 +39,28 @@ def register(username, password):
     hashed_password = hashlib.sha256(password.encode()).hexdigest()
     try:
         cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_password))
+        conn.commit()
         return True
     except sqlite3.IntegrityError:
-        print('Username already exists')
         return False
+
+#usage example
+#status = register('admin', 'admin')
+#print(status)
+
 
 def login(username, password):
     hashed_password = hashlib.sha256(password.encode()).hexdigest()
     cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, hashed_password))
     
     return cursor.fetchone() is not None
+
+#usage example
+#status = login('admin', 'admin')
+#if status:
+#    print('Login success')
+#else:
+#    print('Login failed')
 
 def update_daily_data(username, data_date, data_value):
     cursor.execute('SELECT user_id FROM users WHERE username = ?', (username,))
