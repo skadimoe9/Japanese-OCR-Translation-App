@@ -63,7 +63,7 @@ def login(username, password):
 #    print('Login failed')
 
 def update_daily_data(username, data_date, data_value):
-    cursor.execute('SELECT user_id FROM users WHERE username = ?', (username,))
+    cursor.execute('SELECT id FROM users WHERE username = ?', (username,))
     user_id = cursor.fetchone()
     if user_id:
         cursor.execute('''
@@ -81,8 +81,9 @@ def update_daily_data(username, data_date, data_value):
             VALUES (?, ?, ?)
         ''', (user_id[0], data_date, new_value))
         conn.commit()
+        return True
     else:
-        print(f"User {username} not found.")
+        return False
 
 def get_daily_data(username):
     cursor.execute('''
@@ -93,5 +94,3 @@ def get_daily_data(username):
         ORDER BY d.date
     ''', (username,))
     return cursor.fetchall()
-
-conn.close()
