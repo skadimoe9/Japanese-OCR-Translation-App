@@ -1,8 +1,8 @@
 # cari cara untuk dapet waktu hari ini
 # bikin dataframe (kolom pertama itu bulan tanggal), kolom kedua jumlah karakter dalam satu kalimat 
 
-import numpy as np
-from ocr import process_image, draw_translated_text
+from ocr import process_image, draw_translated_text, delete_saved_image
+from file_handling import create_bar_graph, fetch_graphing_data
 from datetime import datetime
 from server import update_daily_data 
 
@@ -21,12 +21,14 @@ def separate_and_count_characters(df):
     # Get the current timestamp (day/month/year)
     timestamp = datetime.now().strftime("%d/%m/%Y")
         
-    return chara_count, timestamp 
+    return chara_count, timestamp
 
-PATHIMG2 = "./data/kanban.png"
+# Below this is the example on how the program works 
+
+PATHIMG2 = "./data/y.jpg"
 df2 = process_image(PATHIMG2)
 print(df2)
-draw_translated_text(PATHIMG2, df2)
+delete_path = draw_translated_text(PATHIMG2, df2)
 characters, tstamps = separate_and_count_characters(df2)
 print("Translation Counts:", characters)
 print("Timestamps:", tstamps)
@@ -35,3 +37,10 @@ if (update_daily_data('admin', tstamps, characters)):
     print("Data has been updated successfully.")
 else:
     print("Data update failed.")
+
+delete_saved_image(delete_path)
+
+x, y = fetch_graphing_data()
+print(x, y)
+filename_graph = create_bar_graph(x, y)
+print(f"Graph {filename_graph} printed successfully")
