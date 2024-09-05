@@ -2,7 +2,10 @@ import shutil
 import cv2
 import time
 import matplotlib.pyplot as plt
-import os
+import mplcursors
+import sqlite3
+import os 
+import numpy as np
 
 def copy_file(source_path, destination_path):
     try:
@@ -59,22 +62,31 @@ def capture_picture():
 #    print("Picture capture cancelled.")
 
 def create_bar_graph(x,y):
+    os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
+    os.environ['QT_SCREEN_SCALE_FACTORS'] = '1'
+    os.environ['QT_SCALE_FACTOR'] = '1'
 
     # buat output directory untuk save file
     output_dir = "graph"
     os.makedirs(output_dir, exist_ok=True)
 
     # Create bar graph
-    plt.bar(x, y)
+    plt.figure(figsize=(10, 5))
+    bars = plt.bar(x, y, color='red')
 
     # Add title and labels
-    plt.title("Bar Graph")
-    plt.xlabel("X-axis")
-    plt.ylabel("Y-axis")
+    plt.title("Kanji App Used")
+    plt.xlabel("Date")
+    plt.ylabel("Character(s) Translated") 
+    
+    cursor = mplcursors.cursor(bars, hover=True)
+    cursor.connect("add", lambda sel: sel.annotation.set_text(f'{y[sel.index]}'))
+    cursor.connect("add", lambda sel: sel.annotation.get_bbox_patch().set(fc="white"))
 
     # Save the graph
     filename = "datalog.png"
     plt.savefig("./graph/" + filename)
+    plt.show()
 
     return filename
 
@@ -99,3 +111,25 @@ def delete_file():
         file_path = os.path.join(out_image_dir, file)
         if os.path.isfile(file_path):
             os.remove(file_path)
+
+def fetch_graphing_data():
+    # Connect to the SQLite database
+    conn = sqlite3.connect('account_database.db')
+    cursor = conn.cursor()
+    
+    # Execute the query to fetch date and data_value columns
+    cursor.execute("SELECT date, data_value FROM daily_data")
+    rows = cursor.fetchall()
+    
+    # Close the database connection
+    conn.close()
+    
+    # Separate the fetched data into two lists
+    dates = [row[0] for row in rows]
+    data_values = [row[1] for row in rows]
+    
+    # Convert the lists to NumPy arrays
+    dates_array = np.array(dates)
+    data_values_array = np.array(data_values)
+    
+    return dates_array, data_values_array
