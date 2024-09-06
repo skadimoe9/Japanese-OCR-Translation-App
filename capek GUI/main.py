@@ -30,20 +30,16 @@ def GoToInfo(main_window):
 def GoToSocial(main_window):
     main_window.ui.stackedWidget.setCurrentIndex(3)
 
-"""class PageNavigator:
+class PageNavigator:
     def GoToHome(main_window):
         main_window.ui.stackedWidget.setCurrentIndex(0)
 
-    def GoToRegister(main_window):
+    def GoToProfile(main_window):
         main_window.ui.stackedWidget.setCurrentIndex(1)
 
-    def GoToInfo(main_window):
+    def GoToSettings(main_window):
         main_window.ui.stackedWidget.setCurrentIndex(2)
 
-    def GoToSocial(main_window):
-        main_window.ui.stackedWidget.setCurrentIndex(3)
-
-"""
 class SplashScreen(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -159,7 +155,20 @@ class Menu(QMainWindow):
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentIndex(0)
 
+        # Fungsi untuk ke berbagai macam halaman
+        self.ui.Home_Button_1.clicked.connect(PageNavigator.GoToHome(self))
+        self.ui.Home_button_2.clicked.connect(PageNavigator.GoToHome(self))
 
+        self.ui.profile_Button_1.clicked.connect(PageNavigator.GoToProfile(self))
+        self.ui.Profile_button_1.clicked.connect(PageNavigator.GoToProfile(self))
+
+        self.ui.Setting_Button_1.clicked.connect(PageNavigator.GoToSettings(self))
+        self.ui.Settings_button_2.clicked.connect(PageNavigator.GoToSettings(self))
+
+        self.ui.Signout_Button_1.clicked.connect(self.close)
+        self.ui.Signout_Button_2.clicked.connect(self.close)  
+
+        self.ui.frame_3.setHidden(True)
  
 
 if __name__ == "__main__":
