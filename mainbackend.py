@@ -18,7 +18,7 @@ def pick_image_and_run_ocr(username): # butuh username dari login page
 
     print(df2) # function ini bakal ngeprint dataframe, tolong bikin textbox buat ini
 
-    saved_path = draw_translated_text(image_path, df2) # function ini bakal ngeshow gambar bikin box buat ini
+    saved_path = draw_translated_text(image_path, df2) # function ini bakal ngeshow gambar, bikin box buat ini
     image_to_show = "./out_image/showfinalimage.jpg"
     copy_file(saved_path, image_to_show)
 
@@ -28,9 +28,10 @@ def pick_image_and_run_ocr(username): # butuh username dari login page
         update_daily_data(username, tstamps, characters)
     except:
         print("Error updating data.")
-
+    
+    print_results_to_textbox(df2)
     x, y = fetch_graphing_data(username)
-    create_bar_graph(x, y) # function ini bakal ngeshow grafik juga bikin box buat ini
+    create_bar_graph(x, y) # function ini bakal ngeshow grafik juga, bikin box buat ini
     print("Translation succeed")
     
     return saved_path
@@ -45,8 +46,8 @@ def save_image_decision(choice, saved_path):
     if choice == 0:
         delete_saved_image(saved_path)
 
-def login_and_load_profile(username, password):
-    status = login(username, password)
+def login_and_load_profile(username, password): # buat login
+    status, user_id = login(username, password)
     if status:
         print('Login success')
         x, y = fetch_graphing_data(username)
@@ -73,7 +74,8 @@ def capture_camera_ocr(username):
             update_daily_data(username, tstamps, characters)
         except:
             print("Error updating data.")
-
+        
+        print_results_to_textbox(df2)
         x, y = fetch_graphing_data(username)
         create_bar_graph(x, y) # function ini bakal ngeshow grafik juga bikin box buat ini
         print("Translation succeed")
@@ -81,12 +83,22 @@ def capture_camera_ocr(username):
     
     except TypeError :
         print("No character detected")
-        return None
+        return None 
+
+def print_results_to_textbox(df):
+    print("Japanese Text")
+    print()
+    print("Romaji")
+    print()
+    print("Translated Text")
+    print() 
+    pass
 
 # Tolong buat ketika klik tombol buat pick image dan ngerun OCR, nanti setelah function itu selesai 
 # bakal ada pop up yang nanya mau save gambar atau nggak, kalo iya nanti choice = 1, dan kalau gak 
 # nanti choice = 0, lalu jalanin save_image_decision. Nah saved_path di function saved_image_decision 
 # itu asalnya dari return function pick_image_and_run_ocr 
 
+# Example
 pathfiles = capture_camera_ocr("admin1")
 save_image_decision(0, pathfiles)
