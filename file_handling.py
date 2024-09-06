@@ -24,6 +24,7 @@ def select_image_file():
         return file_path
     else:
         print("No file selected")
+        return 400
 
 # Example usage
 # if __name__ == "__main__":
