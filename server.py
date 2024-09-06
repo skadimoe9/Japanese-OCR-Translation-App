@@ -48,19 +48,27 @@ def register(username, password):
 #status = register('admin1', 'admin1')
 #print(status)
 
-
 def login(username, password):
     hashed_password = hashlib.sha256(password.encode()).hexdigest()
     cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, hashed_password))
-    
-    return cursor.fetchone() is not None
+    result = cursor.fetchone()
+    try: 
+        user_id = result[0]
+        return result is not None, user_id
+    except TypeError: 
+        print("Wrong username or password")
+        return result is not None, 0 
+    except:
+        print("Unknown error occured")
+        return False, 0
 
 #usage example
-#status = login('admin', 'admin')
-#if status:
-#    print('Login success')
-#else:
-#    print('Login failed')
+# status, user_id = login('Tresdex', 'nya')
+# print(user_id)
+# if status:
+#     print('Login success')
+# else:
+#     print('Login failed')
 
 def update_daily_data(username, data_date, data_value):
     cursor.execute('SELECT id FROM users WHERE username = ?', (username,))

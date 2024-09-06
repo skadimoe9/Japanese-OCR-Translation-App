@@ -24,6 +24,7 @@ def select_image_file():
         return file_path
     else:
         print("No file selected")
+        return 400
 
 # Example usage
 # if __name__ == "__main__":
@@ -65,16 +66,15 @@ def capture_picture():
             print("Error: Could not read frame.")
             break
 
-        text = "Press 'c' to capture picture or 'q' to quit"
-        cv2.putText(frame, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-
         cv2.imshow("Camera", frame)
 
         if cv2.waitKey(1) & 0xFF == ord('c'):
             filename = f"captured_image_{int(time.time())}.jpg"
-            cv2.imwrite("./data/" + filename, frame)
+            filepath = "./data/" + filename
+            cv2.imwrite(filepath, frame)
             cap.release()
-            return filename
+            cv2.destroyAllWindows()
+            return filepath
         
         elif cv2.waitKey(1) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
@@ -98,7 +98,7 @@ def create_bar_graph(x,y):
 
     # Create bar graph
     plt.figure(figsize=(8, 4))
-    bars = plt.bar(x, y, color='#b0802626', width=0.5)
+    bars = plt.bar(x, y, color='#a84245', width=0.5)
 
     # Add title and labels
     plt.title("Kanji App Used")
@@ -112,7 +112,6 @@ def create_bar_graph(x,y):
     # Save the graph
     filename = "datalog.png"
     plt.savefig("./graph/" + filename)
-    plt.show()
 
 def delete_file():
     # Delete files inside data folder
