@@ -52,14 +52,18 @@ def login_and_load_profile(username, password): # buat login
         print('Login success')
         x, y = fetch_graphing_data(username)
         create_bar_graph(x, y) # function ini bakal ngesave/show grafik user saat ini
+        return True,x,y
     else:
         print('Login failed')
+        return False,None,None
 
 def capture_camera_ocr(username): 
     # dijalanin bareng save image, urutannya ini dluan, buat capture image dan run ocr
     # tolong tambahin teks "click 'c' to capture image and 'q' to quit" di UI
+
     image_path = capture_picture() 
     try:
+        image_path = capture_picture() 
         df2 = process_image(image_path)
 
         print(df2) # function ini bakal ngeprint dataframe, tolong bikin textbox buat ini
