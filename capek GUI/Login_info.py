@@ -11,12 +11,12 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(332, 423)
-        MainWindow.setStyleSheet("")
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+class Ui_Intro(object):
+    def setupUi(self, Intro):
+        Intro.setObjectName("Intro")
+        Intro.resize(332, 437)
+        Intro.setStyleSheet("")
+        self.centralwidget = QtWidgets.QWidget(Intro)
         self.centralwidget.setMaximumSize(QtCore.QSize(450, 600))
         self.centralwidget.setStyleSheet("border-radius: 20px;")
         self.centralwidget.setObjectName("centralwidget")
@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setStyleSheet("background-color: rgb(218, 218, 218);\n"
-"background-radius:20px;")
+"")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -54,30 +54,6 @@ class Ui_MainWindow(object):
         self.frame_3.setObjectName("frame_3")
         self.gridLayout = QtWidgets.QGridLayout(self.frame_3)
         self.gridLayout.setObjectName("gridLayout")
-        self.inputPassword = QtWidgets.QLineEdit(self.frame_3)
-        self.inputPassword.setStyleSheet("background-color : rgba(0,0,0,0);\n"
-"border : none;\n"
-"border-bottom : 3px solid rgba(243, 243, 243,0.8);\n"
-"color : rgba(255,255,255,1);\n"
-"padding-bottom : 7px;")
-        self.inputPassword.setText("")
-        self.inputPassword.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.inputPassword.setObjectName("inputPassword")
-        self.gridLayout.addWidget(self.inputPassword, 5, 0, 1, 1)
-        self.label_2 = QtWidgets.QLabel(self.frame_3)
-        self.label_2.setMinimumSize(QtCore.QSize(0, 30))
-        self.label_2.setMaximumSize(QtCore.QSize(16777215, 50))
-        font = QtGui.QFont()
-        font.setFamily("OCR A Extended")
-        font.setPointSize(24)
-        self.label_2.setFont(font)
-        self.label_2.setStyleSheet("color: rgb(255, 255, 255);\n"
-"background-color : rgba(0,0,0,0);")
-        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.gridLayout.addItem(spacerItem, 6, 0, 1, 1)
         self.frame_4 = QtWidgets.QFrame(self.frame_3)
         self.frame_4.setStyleSheet("background-color : rgba(0,0,0,0);")
         self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -105,13 +81,96 @@ class Ui_MainWindow(object):
 "")
         self.gotoRegister.setObjectName("gotoRegister")
         self.horizontalLayout_4.addWidget(self.gotoRegister)
-        spacerItem1 = QtWidgets.QSpacerItem(30, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem1)
+        spacerItem = QtWidgets.QSpacerItem(30, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem)
         self.label_3.raise_()
         self.gotoRegister.raise_()
-        self.gridLayout.addWidget(self.frame_4, 8, 0, 1, 1)
+        self.gridLayout.addWidget(self.frame_4, 9, 0, 1, 1)
+        self.label_2 = QtWidgets.QLabel(self.frame_3)
+        self.label_2.setMinimumSize(QtCore.QSize(0, 30))
+        self.label_2.setMaximumSize(QtCore.QSize(16777215, 50))
+        font = QtGui.QFont()
+        font.setFamily("OCR A Extended")
+        font.setPointSize(24)
+        self.label_2.setFont(font)
+        self.label_2.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background-color : rgba(0,0,0,0);")
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
+        self.inputPassword = QtWidgets.QLineEdit(self.frame_3)
+        self.inputPassword.setStyleSheet("background-color : rgba(0,0,0,0);\n"
+"border : none;\n"
+"border-bottom : 3px solid rgba(243, 243, 243,0.8);\n"
+"color : rgba(255,255,255,1);\n"
+"padding-bottom : 7px;")
+        self.inputPassword.setText("")
+        self.inputPassword.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.inputPassword.setObjectName("inputPassword")
+        self.gridLayout.addWidget(self.inputPassword, 5, 0, 1, 1)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.gridLayout.addItem(spacerItem1, 6, 0, 1, 1)
         spacerItem2 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.gridLayout.addItem(spacerItem2, 4, 0, 1, 1)
+        self.inputUsername = QtWidgets.QLineEdit(self.frame_3)
+        font = QtGui.QFont()
+        font.setBold(False)
+        font.setWeight(50)
+        self.inputUsername.setFont(font)
+        self.inputUsername.setStyleSheet("background-color : rgba(0,0,0,0);\n"
+"border : none;\n"
+"border-bottom : 3px solid rgba(243, 243, 243,0.8);\n"
+"color : rgba(255,255,255,1);\n"
+"padding-bottom : 7px;")
+        self.inputUsername.setText("")
+        self.inputUsername.setDragEnabled(True)
+        self.inputUsername.setCursorMoveStyle(QtCore.Qt.VisualMoveStyle)
+        self.inputUsername.setClearButtonEnabled(True)
+        self.inputUsername.setObjectName("inputUsername")
+        self.gridLayout.addWidget(self.inputUsername, 3, 0, 1, 1)
+        self.label = QtWidgets.QLabel(self.frame_3)
+        self.label.setMaximumSize(QtCore.QSize(16777215, 50))
+        font = QtGui.QFont()
+        font.setFamily("OCR A Extended")
+        font.setPointSize(26)
+        self.label.setFont(font)
+        self.label.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background-color : rgba(0,0,0,0);")
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
+        self.Login_button = QtWidgets.QPushButton(self.frame_3)
+        self.Login_button.setMaximumSize(QtCore.QSize(16777215, 40))
+        font = QtGui.QFont()
+        font.setFamily("MS Shell Dlg 2")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.Login_button.setFont(font)
+        self.Login_button.setStyleSheet("QPushButton#Login_button {\n"
+"    color: rgba(0, 0, 0, 0.7);  /* Warna teks dengan transparansi 70% */\n"
+"    border: none;  /* Menghilangkan border */\n"
+"    background-color: rgb(240, 240, 240);  /* Warna latar belakang */\n"
+"    border-radius: 15px;  /* Membuat sudut tombol melengkung */\n"
+"    padding: 10px 20px;  /* Tambahkan padding untuk menambah ruang di dalam tombol */\n"
+"}\n"
+"\n"
+"QPushButton#Login_button:hover {\n"
+"    background-color: qlineargradient(spread:pad, x1:0.477, y1:0, x2:0.5, y2:1, \n"
+"    stop:0 rgba(0, 0, 0, 0.2), stop:1 rgba(255, 255, 255, 0.9));\n"
+"    /* Mengubah warna latar belakang saat tombol di-hover */\n"
+"}\n"
+"\n"
+"QPushButton#Login_button:pressed {\n"
+"    padding-left: 5px;\n"
+"    padding-top: 5px;\n"
+"    background-color: rgba(105, 118, 132, 1);  /* Mengubah warna latar belakang saat tombol ditekan */\n"
+"    color: white;  /* Ubah warna teks menjadi putih saat tombol ditekan */\n"
+"    /* Mengurangi padding untuk memberikan efek \"tekan\" */\n"
+"}\n"
+"")
+        self.Login_button.setObjectName("Login_button")
+        self.gridLayout.addWidget(self.Login_button, 7, 0, 1, 1)
         self.widget = QtWidgets.QWidget(self.frame_3)
         self.widget.setStyleSheet("background-color : rgba(0,0,0,0);")
         self.widget.setObjectName("widget")
@@ -185,66 +244,14 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addWidget(self.Discord)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem4)
-        self.gridLayout.addWidget(self.widget, 9, 0, 1, 1)
-        self.inputUsername = QtWidgets.QLineEdit(self.frame_3)
-        font = QtGui.QFont()
-        font.setBold(False)
-        font.setWeight(50)
-        self.inputUsername.setFont(font)
-        self.inputUsername.setStyleSheet("background-color : rgba(0,0,0,0);\n"
-"border : none;\n"
-"border-bottom : 3px solid rgba(243, 243, 243,0.8);\n"
-"color : rgba(255,255,255,1);\n"
-"padding-bottom : 7px;")
-        self.inputUsername.setText("")
-        self.inputUsername.setDragEnabled(True)
-        self.inputUsername.setCursorMoveStyle(QtCore.Qt.VisualMoveStyle)
-        self.inputUsername.setClearButtonEnabled(True)
-        self.inputUsername.setObjectName("inputUsername")
-        self.gridLayout.addWidget(self.inputUsername, 3, 0, 1, 1)
-        self.label = QtWidgets.QLabel(self.frame_3)
-        self.label.setMaximumSize(QtCore.QSize(16777215, 50))
-        font = QtGui.QFont()
-        font.setFamily("OCR A Extended")
-        font.setPointSize(26)
-        self.label.setFont(font)
-        self.label.setStyleSheet("color: rgb(255, 255, 255);\n"
-"background-color : rgba(0,0,0,0);")
-        self.label.setAlignment(QtCore.Qt.AlignCenter)
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
-        self.Login_button = QtWidgets.QPushButton(self.frame_3)
-        self.Login_button.setMaximumSize(QtCore.QSize(16777215, 40))
-        font = QtGui.QFont()
-        font.setFamily("MS Shell Dlg 2")
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
-        self.Login_button.setFont(font)
-        self.Login_button.setStyleSheet("QPushButton#Login_button {\n"
-"    color: rgba(0, 0, 0, 0.7);  /* Warna teks dengan transparansi 70% */\n"
-"    border: none;  /* Menghilangkan border */\n"
-"    background-color: rgb(240, 240, 240);  /* Warna latar belakang */\n"
-"    border-radius: 15px;  /* Membuat sudut tombol melengkung */\n"
-"    padding: 10px 20px;  /* Tambahkan padding untuk menambah ruang di dalam tombol */\n"
-"}\n"
-"\n"
-"QPushButton#Login_button:hover {\n"
-"    background-color: qlineargradient(spread:pad, x1:0.477, y1:0, x2:0.5, y2:1, \n"
-"    stop:0 rgba(0, 0, 0, 0.2), stop:1 rgba(255, 255, 255, 0.9));\n"
-"    /* Mengubah warna latar belakang saat tombol di-hover */\n"
-"}\n"
-"\n"
-"QPushButton#Login_button:pressed {\n"
-"    padding-left: 5px;\n"
-"    padding-top: 5px;\n"
-"    background-color: rgba(105, 118, 132, 1);  /* Mengubah warna latar belakang saat tombol ditekan */\n"
-"    color: white;  /* Ubah warna teks menjadi putih saat tombol ditekan */\n"
-"    /* Mengurangi padding untuk memberikan efek \"tekan\" */\n"
-"}\n"
-"")
-        self.Login_button.setObjectName("Login_button")
-        self.gridLayout.addWidget(self.Login_button, 7, 0, 1, 1)
+        self.gridLayout.addWidget(self.widget, 10, 0, 1, 1)
+        self.Error = QtWidgets.QLabel(self.frame_3)
+        self.Error.setStyleSheet("background-color:rgba(0,0,0,0);\n"
+"color:rgb(255, 19, 34);\n"
+"padding-left:15px;")
+        self.Error.setText("")
+        self.Error.setObjectName("Error")
+        self.gridLayout.addWidget(self.Error, 8, 0, 1, 1)
         self.gridLayout_2.addWidget(self.frame_3, 0, 0, 1, 1)
         self.stackedWidget.addWidget(self.Login_page)
         self.Register_page = QtWidgets.QWidget()
@@ -314,15 +321,16 @@ class Ui_MainWindow(object):
 "padding-bottom : 7px;")
         self.ReInputPassword.setObjectName("ReInputPassword")
         self.verticalLayout.addWidget(self.ReInputPassword)
-        spacerItem7 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.verticalLayout.addItem(spacerItem7)
+        self.Error_2 = QtWidgets.QLabel(self.frame_5)
+        self.Error_2.setStyleSheet("background-color:rgba(0,0,0,0);\n"
+"")
+        self.Error_2.setText("")
+        self.Error_2.setObjectName("Error_2")
+        self.verticalLayout.addWidget(self.Error_2)
         self.RegisterButton = QtWidgets.QPushButton(self.frame_5)
         self.RegisterButton.setMaximumSize(QtCore.QSize(16777215, 40))
         font = QtGui.QFont()
-        font.setFamily("MS Shell Dlg 2")
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(1)
         self.RegisterButton.setFont(font)
         self.RegisterButton.setStyleSheet("QPushButton#RegisterButton{\n"
 "    color: rgba(0, 0, 0, 0.7);  /* Warna teks dengan transparansi 70% */\n"
@@ -330,6 +338,7 @@ class Ui_MainWindow(object):
 "    background-color: rgb(240, 240, 240);  /* Warna latar belakang */\n"
 "    border-radius: 15px;  /* Membuat sudut tombol melengkung */\n"
 "    padding: 10px 20px;  /* Tambahkan padding untuk menambah ruang di dalam tombol */\n"
+"    font-size : 18px;\n"
 "}\n"
 "\n"
 "QPushButton#RegisterButton:hover{\n"
@@ -355,8 +364,8 @@ class Ui_MainWindow(object):
         self.frame_6.setObjectName("frame_6")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.frame_6)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_6.addItem(spacerItem8)
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem7)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.Google_1 = QtWidgets.QPushButton(self.frame_6)
@@ -424,8 +433,8 @@ class Ui_MainWindow(object):
 "}")
         self.DC_1.setObjectName("DC_1")
         self.horizontalLayout_6.addWidget(self.DC_1)
-        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_6.addItem(spacerItem9)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem8)
         self.verticalLayout.addWidget(self.frame_6)
         self.gridLayout_4.addWidget(self.frame_5, 9, 0, 1, 1)
         self.stackedWidget.addWidget(self.Register_page)
@@ -494,8 +503,7 @@ class Ui_MainWindow(object):
         self.frame_10 = QtWidgets.QFrame(self.frame_9)
         self.frame_10.setStyleSheet("background-color: rgb(205, 185, 186);\n"
 "color : rgba(255,255,255,1);\n"
-"border-radius-top: 0px 0px;\n"
-"border-radius-bottom: 20px 20px;")
+"border-radius:20px")
         self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_10.setObjectName("frame_10")
@@ -534,8 +542,7 @@ class Ui_MainWindow(object):
         self.frame_13 = QtWidgets.QFrame(self.frame_11)
         self.frame_13.setStyleSheet("background-color: rgb(205, 185, 186);\n"
 "color : rgba(255,255,255,1);\n"
-"border-radius-top: 0px 0px;\n"
-"border-radius-bottom: 20px 20px;")
+"border-radius:20px")
         self.frame_13.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_13.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_13.setObjectName("frame_13")
@@ -574,8 +581,7 @@ class Ui_MainWindow(object):
         self.frame_14 = QtWidgets.QFrame(self.frame_12)
         self.frame_14.setStyleSheet("background-color: rgb(205, 185, 186);\n"
 "color : rgba(255,255,255,1);\n"
-"border-radius-top: 0px 0px;\n"
-"border-radius-bottom: 20px 20px;")
+"border-radius:20px")
         self.frame_14.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_14.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_14.setObjectName("frame_14")
@@ -617,8 +623,8 @@ class Ui_MainWindow(object):
         self.label_13.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
         self.label_13.setObjectName("label_13")
         self.gridLayout_10.addWidget(self.label_13, 2, 0, 1, 1)
-        spacerItem10 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.gridLayout_10.addItem(spacerItem10, 0, 0, 1, 1)
+        spacerItem9 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.gridLayout_10.addItem(spacerItem9, 0, 0, 1, 1)
         self.label_14 = QtWidgets.QLabel(self.frame_15)
         self.label_14.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
@@ -643,9 +649,12 @@ class Ui_MainWindow(object):
         self.GoToHome = QtWidgets.QPushButton(self.frame_2)
         self.GoToHome.setMinimumSize(QtCore.QSize(0, 0))
         self.GoToHome.setMaximumSize(QtCore.QSize(20, 20))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.GoToHome.setFont(font)
         self.GoToHome.setStyleSheet("border-image: url(:/newPrefix/home.png);")
         self.GoToHome.setText("")
-        self.GoToHome.setIconSize(QtCore.QSize(10, 10))
+        self.GoToHome.setIconSize(QtCore.QSize(15, 15))
         self.GoToHome.setObjectName("GoToHome")
         self.horizontalLayout_2.addWidget(self.GoToHome)
         self.GoToInfo = QtWidgets.QPushButton(self.frame_2)
@@ -655,75 +664,62 @@ class Ui_MainWindow(object):
         self.GoToInfo.setText("")
         self.GoToInfo.setObjectName("GoToInfo")
         self.horizontalLayout_2.addWidget(self.GoToInfo)
-        spacerItem11 = QtWidgets.QSpacerItem(500, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem11)
-        self.Minimize = QtWidgets.QPushButton(self.frame_2)
-        self.Minimize.setMinimumSize(QtCore.QSize(0, 0))
-        self.Minimize.setMaximumSize(QtCore.QSize(20, 20))
-        self.Minimize.setStyleSheet("border-image: url(:/newPrefix/minus-small.png);")
-        self.Minimize.setText("")
-        self.Minimize.setObjectName("Minimize")
-        self.horizontalLayout_2.addWidget(self.Minimize)
-        self.pushButton_3 = QtWidgets.QPushButton(self.frame_2)
-        self.pushButton_3.setMaximumSize(QtCore.QSize(20, 20))
-        self.pushButton_3.setStyleSheet("border-image: url(:/newPrefix/cross-small.png);")
-        self.pushButton_3.setText("")
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.horizontalLayout_2.addWidget(self.pushButton_3)
+        spacerItem10 = QtWidgets.QSpacerItem(500, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem10)
         self.gridLayout_3.addWidget(self.frame_2, 0, 0, 1, 1)
-        MainWindow.setCentralWidget(self.centralwidget)
+        Intro.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
+        self.retranslateUi(Intro)
         self.stackedWidget.setCurrentIndex(1)
         self.pushButton_11.toggled['bool'].connect(self.frame_14.setHidden) # type: ignore
         self.Dicky.toggled['bool'].connect(self.frame_10.setHidden) # type: ignore
         self.pushButton_10.toggled['bool'].connect(self.frame_13.setHidden) # type: ignore
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(Intro)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, Intro):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.inputPassword.setPlaceholderText(_translate("MainWindow", "Password"))
-        self.label_2.setText(_translate("MainWindow", "OCR"))
-        self.label_3.setText(_translate("MainWindow", "Don\'t have an account yet?"))
-        self.gotoRegister.setText(_translate("MainWindow", "Create One"))
-        self.Google.setText(_translate("MainWindow", "H"))
-        self.WA.setText(_translate("MainWindow", "L"))
-        self.Youtube.setText(_translate("MainWindow", "M"))
-        self.Discord.setText(_translate("MainWindow", "Y"))
-        self.inputUsername.setPlaceholderText(_translate("MainWindow", "Username"))
-        self.label.setText(_translate("MainWindow", "Log In"))
-        self.Login_button.setText(_translate("MainWindow", "L o g  I n"))
-        self.label_4.setText(_translate("MainWindow", "OCR"))
-        self.label_5.setText(_translate("MainWindow", "REGISTER"))
-        self.inputUsername_2.setPlaceholderText(_translate("MainWindow", "User Name"))
-        self.InputPassword.setPlaceholderText(_translate("MainWindow", "Password"))
-        self.ReInputPassword.setPlaceholderText(_translate("MainWindow", "Re-Enter Password"))
-        self.RegisterButton.setText(_translate("MainWindow", "R e g i s t e r"))
-        self.Google_1.setText(_translate("MainWindow", "H"))
-        self.WA_1.setText(_translate("MainWindow", "L"))
-        self.YT_1.setText(_translate("MainWindow", "M"))
-        self.DC_1.setText(_translate("MainWindow", "Y"))
-        self.label_6.setText(_translate("MainWindow", "JOB DESC INFORMATION"))
-        self.Dicky.setText(_translate("MainWindow", "Dicky Osmond"))
-        self.label_7.setText(_translate("MainWindow", "Coba"))
-        self.label_8.setText(_translate("MainWindow", "Coba"))
-        self.pushButton_10.setText(_translate("MainWindow", "Fadhli Ammar T.H."))
-        self.label_9.setText(_translate("MainWindow", "Coba"))
-        self.label_10.setText(_translate("MainWindow", "Coba"))
-        self.pushButton_11.setText(_translate("MainWindow", "Stanislaus David "))
-        self.label_11.setText(_translate("MainWindow", "Coba"))
-        self.label_12.setText(_translate("MainWindow", "Coba"))
-        self.label_13.setText(_translate("MainWindow", "MOHON MAAF KAMI "))
-        self.label_14.setText(_translate("MainWindow", "TIDAK PUBLIK"))
-import Resources_rc
+        Intro.setWindowTitle(_translate("Intro", "MainWindow"))
+        self.label_3.setText(_translate("Intro", "Don\'t have an account yet?"))
+        self.gotoRegister.setText(_translate("Intro", "Create One"))
+        self.label_2.setText(_translate("Intro", "OCR"))
+        self.inputPassword.setPlaceholderText(_translate("Intro", "Password"))
+        self.inputUsername.setPlaceholderText(_translate("Intro", "Username"))
+        self.label.setText(_translate("Intro", "Log In"))
+        self.Login_button.setText(_translate("Intro", "L o g  I n"))
+        self.Google.setText(_translate("Intro", "H"))
+        self.WA.setText(_translate("Intro", "L"))
+        self.Youtube.setText(_translate("Intro", "M"))
+        self.Discord.setText(_translate("Intro", "Y"))
+        self.label_4.setText(_translate("Intro", "OCR"))
+        self.label_5.setText(_translate("Intro", "REGISTER"))
+        self.inputUsername_2.setPlaceholderText(_translate("Intro", "User Name"))
+        self.InputPassword.setPlaceholderText(_translate("Intro", "Password"))
+        self.ReInputPassword.setPlaceholderText(_translate("Intro", "Re-Enter Password"))
+        self.RegisterButton.setText(_translate("Intro", "R e g i s t e r"))
+        self.Google_1.setText(_translate("Intro", "H"))
+        self.WA_1.setText(_translate("Intro", "L"))
+        self.YT_1.setText(_translate("Intro", "M"))
+        self.DC_1.setText(_translate("Intro", "Y"))
+        self.label_6.setText(_translate("Intro", "JOB DESC INFORMATION"))
+        self.Dicky.setText(_translate("Intro", "Dicky Osmond"))
+        self.label_7.setText(_translate("Intro", "Coba"))
+        self.label_8.setText(_translate("Intro", "Coba"))
+        self.pushButton_10.setText(_translate("Intro", "Fadhli Ammar T.H."))
+        self.label_9.setText(_translate("Intro", "Coba"))
+        self.label_10.setText(_translate("Intro", "Coba"))
+        self.pushButton_11.setText(_translate("Intro", "Stanislaus David "))
+        self.label_11.setText(_translate("Intro", "Coba"))
+        self.label_12.setText(_translate("Intro", "Coba"))
+        self.label_13.setText(_translate("Intro", "MOHON MAAF KAMI "))
+        self.label_14.setText(_translate("Intro", "TIDAK PUBLIK"))
+import Resources
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    Intro = QtWidgets.QMainWindow()
+    ui = Ui_Intro()
+    ui.setupUi(Intro)
+    Intro.show()
     sys.exit(app.exec_())
