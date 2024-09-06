@@ -110,6 +110,6 @@ def print_results_to_textbox(df):
 # itu asalnya dari return function pick_image_and_run_ocr 
 
 # Example
-#pathfiles = capture_camera_ocr("admin1")
-pathfiles = pick_image_and_run_ocr("admin1")
-save_image_decision(0, pathfiles)
+# pathfiles = capture_camera_ocr("admin1")
+# pathfiles = pick_image_and_run_ocr("admin1")
+# save_image_decision(0, pathfiles)
