@@ -24,24 +24,3 @@ def separate_and_count_characters(df):
     return chara_count, timestamp
 
 # Below this is the example on how the program works 
-
-PATHIMG2 = "./data/y.jpg"
-df2 = process_image(PATHIMG2)
-print(df2)
-delete_path = draw_translated_text(PATHIMG2, df2)
-characters, tstamps = separate_and_count_characters(df2)
-print("Translation Counts:", characters)
-print("Timestamps:", tstamps)
-
-try: 
-    update_daily_data('admin1', tstamps, characters)
-    print("Data has been updated successfully.")
-except:
-    print("Error updating data.")
-
-
-delete_saved_image(delete_path)
-
-x, y = fetch_graphing_data("admin1")
-filename_graph = create_bar_graph(x, y)
-print(f"Graph {filename_graph} printed successfully")

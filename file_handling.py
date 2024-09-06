@@ -7,6 +7,31 @@ import sqlite3
 import os 
 from server import get_daily_data
 import numpy as np
+import tkinter as tk
+from tkinter import filedialog
+
+def select_image_file():
+    # Create a root window and hide it
+    root = tk.Tk()
+    root.withdraw()
+    
+    # Open file dialog and allow user to select an image file
+    file_path = filedialog.askopenfilename(
+        title="Select an Image File",
+        filetypes=[("Image Files", "*.jpg;*.jpeg;*.png;*.jfif")]
+    )
+    if file_path:
+        return file_path
+    else:
+        print("No file selected")
+
+# Example usage
+# if __name__ == "__main__":
+#     selected_file = select_image_file()
+#     if selected_file:
+#         print("Selected file:", selected_file)
+#     else:
+#         print("No file selected")
 
 def copy_file(source_path, destination_path):
     try:
@@ -88,8 +113,6 @@ def create_bar_graph(x,y):
     filename = "datalog.png"
     plt.savefig("./graph/" + filename)
     plt.show()
-
-    return filename
 
 def delete_file():
     # Delete files inside data folder
