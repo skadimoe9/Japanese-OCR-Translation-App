@@ -148,7 +148,7 @@ class Ui_SplashScreen(object):
         self.Ttile.setText(_translate("SplashScreen", "<Strong> Learn </Strong> Kanji"))
         self.Loading.setText(_translate("SplashScreen", "<html><head/><body><p align=\"center\"><span style=\" font-size:7pt;\">Loading ..</span></p></body></html>"))
         self.Description.setText(_translate("SplashScreen", "<Strong> OCR </Strong> Learning App"))
-import Resources
+import capekGUI.Resources
 
 
 if __name__ == "__main__":
