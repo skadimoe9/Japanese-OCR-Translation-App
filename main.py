@@ -11,7 +11,7 @@ from ocr import process_image, draw_translated_text, delete_saved_image
 from Splash_Screen import Ui_SplashScreen
 from Login_info import Ui_Intro
 from Menu import Ui_Menu
-import server
+from server import register
 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
 os.environ['QT_SCREEN_SCALE_FACTORS'] = '1'
@@ -114,7 +114,7 @@ class Intro(QMainWindow):
         password = self.ui.inputPassword.text()
 
         # Memastikan login dengan menggunakan mainbackend
-        if  login_and_load_profile(username, password):
+        if login_and_load_profile(username, password):
             self.menu_window = Menu()  
             self.menu_window.show()
 
@@ -142,7 +142,7 @@ class Intro(QMainWindow):
         reinput = self.ui.ReInputPassword.text()
 
         if password == reinput:
-            if server.register(username, password):
+            if register(username, password):
                 self.ui.stackedWidget.setCurrentIndex(0)
             else:
                 self.ui.Error_2.setText("Username Already Exists")
