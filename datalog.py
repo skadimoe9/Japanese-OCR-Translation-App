@@ -43,6 +43,5 @@ except:
 delete_saved_image(delete_path)
 
 x, y = fetch_graphing_data("admin1")
-print(x, y)
 filename_graph = create_bar_graph(x, y)
 print(f"Graph {filename_graph} printed successfully")

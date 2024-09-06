@@ -73,7 +73,7 @@ def create_bar_graph(x,y):
 
     # Create bar graph
     plt.figure(figsize=(8, 4))
-    bars = plt.bar(x, y, color='red', width=0.5)
+    bars = plt.bar(x, y, color='#b0802626', width=0.5)
 
     # Add title and labels
     plt.title("Kanji App Used")
