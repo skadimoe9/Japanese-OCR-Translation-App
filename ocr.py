@@ -114,7 +114,6 @@ def draw_translated_text(image_path, df): # Fitur add text translate ke gambar, 
     
     # save file
     image.save(full_path, format="JPEG")
-    image.show() 
     return full_path
 
 def delete_saved_image(file_path):
@@ -125,11 +124,3 @@ def delete_saved_image(file_path):
         print(f"File {file_path} not found.")
     except Exception as e:
         print(f"Error deleting file {file_path}: {e}")
-
-#example function used
-#IMAGE_PATH = "./data/b.jpg"
-#IMAGE_PATH = "./data/kanban.png"
-#df = process_image(IMAGE_PATH)
-
-#print(df)
-#draw_translated_text(IMAGE_PATH, df)
