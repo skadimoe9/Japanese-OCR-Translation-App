@@ -716,7 +716,7 @@ class Ui_MainWindow(object):
         self.label_12.setText(_translate("MainWindow", "Coba"))
         self.label_13.setText(_translate("MainWindow", "MOHON MAAF KAMI "))
         self.label_14.setText(_translate("MainWindow", "TIDAK PUBLIK"))
-import Resources_rc
+import Resources
 
 
 if __name__ == "__main__":
