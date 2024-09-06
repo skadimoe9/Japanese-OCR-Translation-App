@@ -3,9 +3,8 @@ import os
 from PyQt5 import QtCore
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsDropShadowEffect, QGraphicsView, QGraphicsScene
-from mainbackend import login_and_load_profile
-from file_handling import select_image_file, create_bar_graph, fetch_graphing_data, copy_file, capture_picture
-from ocr import process_image, draw_translated_text, delete_saved_image
+from mainbackend import login_and_load_profile, pick_image_and_run_ocr,capture_camera_ocr
+from ocr import delete_saved_image
 
 # --> Splash Screen
 from Splash_Screen import Ui_SplashScreen
@@ -42,6 +41,10 @@ class PageNavigator:
 
     def GoToSettings(main_window):
         main_window.ui.stackedWidget.setCurrentIndex(2)
+
+class ShareData:
+    username = None
+    user_id = None
 
 class SplashScreen(QMainWindow):
     def __init__(self):
@@ -86,6 +89,7 @@ class Intro(QMainWindow):
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentIndex(0)
 
+
         # Fungsi untuk ke berbagai macam halaman
         self.ui.GoToHome.clicked.connect(lambda: GoToHome(self))
         self.ui.GoToInfo.clicked.connect(lambda: GoToInfo(self))
@@ -110,11 +114,12 @@ class Intro(QMainWindow):
         self.adjustSize()
 
     def login(self):
-        username = self.ui.inputUsername.text()
+        ShareData.username = self.ui.inputUsername.text()
         password = self.ui.inputPassword.text()
 
+        status,ShareData.user_id = login_and_load_profile(ShareData.username, password)
         # Memastikan login dengan menggunakan mainbackend
-        if login_and_load_profile(username, password):
+        if status:
             self.menu_window = Menu()  
             self.menu_window.show()
 
@@ -178,6 +183,9 @@ class Menu(QMainWindow):
 
         self.ui.Signout_Button_1.clicked.connect(self.close)
         self.ui.Signout_Button_2.clicked.connect(self.close)
+
+        self.ui.pushButton_7.clicked.connect(lambda:pick_image_and_run_ocr(ShareData.username))
+        self.ui.pushButton_14.clicked.connect(lambda:capture_camera_ocr(ShareData.username))
 
         # Hapus atau ubah jika frame_3 tidak ada di UI Designer
         try:

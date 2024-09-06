@@ -16,8 +16,8 @@ def pick_image_and_run_ocr(username): # butuh username dari login page
         return None
     df2 = process_image(image_path)
 
-    saved_path = draw_translated_text(image_path, df2) # function ini bakal ngeshow gambar, bikin box buat ini
-    image_to_show = "./out_image/showfinalimage.jpg"
+    saved_path = draw_translated_text(image_path, df2) 
+    image_to_show = "./out_image/showfinalimage.jpg" # Ini ditampilin di hasil
     copy_file(saved_path, image_to_show)
 
     characters, tstamps = separate_and_count_characters(df2)
@@ -115,5 +115,5 @@ def print_results_to_textbox(df):
 
 # Example
 # pathfiles = capture_camera_ocr("admin1")
-pathfiles = pick_image_and_run_ocr("admin1")
-save_image_decision(0, pathfiles)
+# pathfiles = pick_image_and_run_ocr("admin1")
+# save_image_decision(0, pathfiles)
