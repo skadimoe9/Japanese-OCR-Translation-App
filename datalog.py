@@ -22,5 +22,3 @@ def separate_and_count_characters(df):
     timestamp = datetime.now().strftime("%d/%m/%Y")
         
     return chara_count, timestamp
-
-# Below this is the example on how the program works 

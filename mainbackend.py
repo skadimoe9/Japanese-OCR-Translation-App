@@ -43,7 +43,7 @@ def save_image_decision(choice, saved_path):
         print("Picture saved.")
     if saved_path == None:
         print("No image saved.")
-    if choice == 0:
+    if choice == 0 and saved_path != None:
         delete_saved_image(saved_path)
 
 def login_and_load_profile(username, password): # buat login
@@ -60,8 +60,9 @@ def login_and_load_profile(username, password): # buat login
 def capture_camera_ocr(username): 
     # dijalanin bareng save image, urutannya ini dluan, buat capture image dan run ocr
     # tolong tambahin teks "click 'c' to capture image and 'q' to quit" di UI
-
-    image_path = capture_picture() 
+    image_path = capture_picture()
+    if image_path == False:
+        return None 
     try:
         image_path = capture_picture() 
         df2 = process_image(image_path)
@@ -90,13 +91,21 @@ def capture_camera_ocr(username):
         return None 
 
 def print_results_to_textbox(df):
-    print("Japanese Text")
-    print()
-    print("Romaji")
-    print()
-    print("Translated Text")
-    print() 
-    pass
+    for index, row in df.iterrows():
+        if row['Translated'] == None:
+            continue
+        print("Japanese Text")
+        print(row['Japanese'])
+        print()
+        print("Romaji")
+        for text in row['Romaji']:
+            print(text + " ", end="")
+        print()
+        print()
+        print("Translated Text")
+        print(row['Translated'])
+        print() 
+
 
 # Tolong buat ketika klik tombol buat pick image dan ngerun OCR, nanti setelah function itu selesai 
 # bakal ada pop up yang nanya mau save gambar atau nggak, kalo iya nanti choice = 1, dan kalau gak 
@@ -104,5 +113,6 @@ def print_results_to_textbox(df):
 # itu asalnya dari return function pick_image_and_run_ocr 
 
 # Example
-pathfiles = capture_camera_ocr("admin1")
-save_image_decision(0, pathfiles)
+# pathfiles = capture_camera_ocr("admin1")
+# pathfiles = pick_image_and_run_ocr("admin1")
+# save_image_decision(0, pathfiles)
