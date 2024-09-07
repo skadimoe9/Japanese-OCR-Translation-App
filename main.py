@@ -56,6 +56,7 @@ class ShareData:
     user_id = None
     df = None
     image_path = None
+    is_there_an_image = None
 
 class DialogBox(QDialog):
     def __init__(self, parent=None):
@@ -224,60 +225,73 @@ class Menu(QMainWindow):
         self.ui.frame_3.setHidden(True)
 
     def show_yes_no_dialog(self):
-        msg_box = QMessageBox()
-        msg_box.setIcon(QMessageBox.Question)
-        msg_box.setText("Do you want to save image with translated text?")
-        msg_box.setWindowTitle("Confirmation")
-        msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
-        msg_box.setDefaultButton(QMessageBox.No)
-        response = msg_box.exec_()
+        if ShareData.is_there_an_image == 1:
+            msg_box = QMessageBox()
+            msg_box.setIcon(QMessageBox.Question)
+            msg_box.setText("Do you want to save image with translated text?")
+            msg_box.setWindowTitle("Confirmation")
+            msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+            msg_box.setDefaultButton(QMessageBox.No)
+            response = msg_box.exec_()
 
-        if response == QMessageBox.Yes:
-            save_image_decision(1, ShareData.image_path)
+            if response == QMessageBox.Yes:
+                save_image_decision(1, ShareData.image_path)
+                msg_box = QMessageBox()
+                msg_box.setIcon(QMessageBox.Information)
+                msg_box.setText(f"Image saved")
+                msg_box.setWindowTitle("Alert")
+                msg_box.setStandardButtons(QMessageBox.Ok)
+                msg_box.exec_()
+            else:
+                save_image_decision(0, ShareData.image_path)
+                msg_box = QMessageBox()
+                msg_box.setIcon(QMessageBox.Information)
+                msg_box.setText(f"Image not saved")
+                msg_box.setWindowTitle("Alert")
+                msg_box.setStandardButtons(QMessageBox.Ok)
+                msg_box.exec_() 
+        else: 
             msg_box = QMessageBox()
             msg_box.setIcon(QMessageBox.Information)
-            msg_box.setText(f"Image saved")
-            msg_box.setWindowTitle("Alert")
-            msg_box.setStandardButtons(QMessageBox.Ok)
-            msg_box.exec_()
-        else:
-            save_image_decision(0, ShareData.image_path)
-            msg_box = QMessageBox()
-            msg_box.setIcon(QMessageBox.Information)
-            msg_box.setText(f"Image not saved")
+            msg_box.setText(f"No image to save")
             msg_box.setWindowTitle("Alert")
             msg_box.setStandardButtons(QMessageBox.Ok)
             msg_box.exec_()
 
     def add_rows_from_dataframe(self, df):
-        for index, row in df.iterrows():
-            if row['Translated'] is None:
-                continue    
+        try:
+            for index, row in df.iterrows():
+                if row['Translated'] is None:
+                    continue    
 
-            # Create a new row with a QLabel and QLineEdit inside a QWidget
-            row_widget = QWidget()
-            row_layout = QVBoxLayout(row_widget)
+                # Create a new row with a QLabel and QLineEdit inside a QWidget
+                row_widget = QWidget()
+                row_layout = QVBoxLayout(row_widget)
 
-            # Add Japanese Text
-            label_japanese = QLabel(f"Japanese Text: {row['Japanese']}", row_widget)
-            label_japanese.setWordWrap(True)
-            row_layout.addWidget(label_japanese)
-            
-            # Add Romaji
-            label_romaji = QLabel("Romaji: " + " ".join(row['Romaji']), row_widget)
-            label_romaji.setWordWrap(True)
-            row_layout.addWidget(label_romaji)
-            
-            # Add Translated Text
-            label_translated = QLabel(f"Translated Text: {row['Translated']}", row_widget)
-            label_translated.setWordWrap(True)
-            row_layout.addWidget(label_translated)
+                # Add Japanese Text
+                label_japanese = QLabel(f"Japanese Text: {row['Japanese']}", row_widget)
+                label_japanese.setWordWrap(True)
+                row_layout.addWidget(label_japanese)
+                
+                # Add Romaji
+                label_romaji = QLabel("Romaji: " + " ".join(row['Romaji']), row_widget)
+                label_romaji.setWordWrap(True)
+                row_layout.addWidget(label_romaji)
+                
+                # Add Translated Text
+                label_translated = QLabel(f"Translated Text: {row['Translated']}", row_widget)
+                label_translated.setWordWrap(True)
+                row_layout.addWidget(label_translated)
 
-            # Set the yellow background for the row widget
-            row_widget.setStyleSheet("background-color: rgb(219, 211, 189); border: 1px solid black; margin: 5px; padding: 5px;")
+                # Set the yellow background for the row widget
+                row_widget.setStyleSheet("background-color: rgb(219, 211, 189); border: 1px solid black; margin: 5px; padding: 5px;")
 
-            # Add the row to the main layout
-            self.ui.scrollArea_2.widget().layout().addWidget(row_widget)
+                # Add the row to the main layout
+                self.ui.scrollArea_2.widget().layout().addWidget(row_widget)
+                ShareData.is_there_an_image = 1
+        except AttributeError:
+            print("No image selected")
+            ShareData.is_there_an_image = 0
 
     def pick_image_and_extract_dataframe(self):
         ShareData.image_path, df = pick_image_and_run_ocr(ShareData.username)
