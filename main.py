@@ -1,7 +1,6 @@
 import sys
 import os
 import pandas as pd
-import
 
 from PyQt5 import QtCore
 from PyQt5.QtGui import QColor, QPixmap, QIcon
