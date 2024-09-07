@@ -2,7 +2,7 @@ import sys
 import os
 from PyQt5 import QtCore
 from PyQt5.QtGui import QColor, QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGraphicsDropShadowEffect, QLabel, QPushButton, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGraphicsDropShadowEffect, QLabel, QPushButton, QVBoxLayout, QMessageBox
 from OCR_Final.mainbackend import login_and_load_profile, pick_image_and_run_ocr, capture_camera_ocr
 from OCR_Final.file_handling import delete_file
 from OCR_Final.ocr import delete_saved_image
@@ -59,10 +59,13 @@ class DialogBox(QDialog):
         self.ui = Ui_Form()  # Use the UI from Dialog
         self.ui.setupUi(self)
 
-    def ImageConfirmation(self):
-        self.ui.stackedWidget.setCurrentIndex(0)
-        # Gunakan lambda atau partial untuk memanggil fungsi saat tombol diklik
-        self.ui.pushButton_3.clicked.connect(lambda: pick_image_and_run_ocr(ShareData.username))
+    def show_confirmation_dialog(self):
+        msg_box = QMessageBox()
+        msg_box.setIcon(QMessageBox.Information)
+        msg_box.setText(f"Press 'c' to capture image and 'q' to quit.")
+        msg_box.setWindowTitle("Alert")
+        msg_box.setStandardButtons(QMessageBox.Ok)
+        msg_box.exec_()
 
     def SaveConfirmation(self):
         self.ui.stackedWidget.setCurrentIndex(1)
@@ -203,8 +206,8 @@ class Menu(QMainWindow):
 
         self.ui.Signout_Button_1.clicked.connect(self.close)
         self.ui.Signout_Button_2.clicked.connect(self.close)
-        self.ui.pushButton_7.clicked.connect(lambda:(DialogBox.ImageConfirmation(self),PageNavigator.GoToResult(self)))
-        self.ui.pushButton_14.clicked.connect(lambda:(capture_camera_ocr(ShareData.username),PageNavigator.GoToResult(self)))
+        self.ui.pushButton_7.clicked.connect(lambda:(pick_image_and_run_ocr(ShareData.username),PageNavigator.GoToResult(self)))
+        self.ui.pushButton_14.clicked.connect(lambda:(DialogBox.show_confirmation_dialog(self),capture_camera_ocr(ShareData.username),PageNavigator.GoToResult(self)))
         # Connect button_14 to open the confirmation dialog
 
         self.ui.frame_3.setHidden(True)
