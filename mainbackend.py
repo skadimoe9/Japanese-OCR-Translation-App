@@ -82,7 +82,6 @@ def capture_camera_ocr(username):
         x, y = fetch_graphing_data(username)
         create_bar_graph(x, y) # function ini bakal ngeshow grafik juga bikin box buat ini
         print("Translation succeed")
-        GoToResult()
         return saved_path
     
     except TypeError :

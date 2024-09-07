@@ -69,8 +69,7 @@ def capture_picture():
         cv2.imshow("Camera", frame)
 
         if cv2.waitKey(1) & 0xFF == ord('c'):
-            filename = f"captured_image_{int(time.time())}.jpg"
-            filepath = "./data/" + filename
+            filepath = "./data/temp_image.jpg" 
             cv2.imwrite(filepath, frame)
             cap.release()
             cv2.destroyAllWindows()
