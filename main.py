@@ -1,12 +1,12 @@
 import sys
 import os
+import pandas as pd
 from PyQt5 import QtCore
 from PyQt5.QtGui import QColor, QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGraphicsDropShadowEffect, QLabel, QPushButton, QVBoxLayout, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGraphicsDropShadowEffect, QLabel, QPushButton, QVBoxLayout, QMessageBox, QWidget
 from OCR_Final.mainbackend import login_and_load_profile, pick_image_and_run_ocr, capture_camera_ocr
 from OCR_Final.file_handling import delete_file
 from OCR_Final.ocr import delete_saved_image
-from GUI_Final.Hasil import add_rows_from_dataframe
 
 
 # --> Splash Screen
@@ -217,17 +217,47 @@ class Menu(QMainWindow):
         # Connect button_14 to open the confirmation dialog
         self.ui.frame_3.setHidden(True)
 
+    def add_rows_from_dataframe(self, df):
+        for index, row in df.iterrows():
+            if row['Translated'] is None:
+                continue    
+
+            # Create a new row with a QLabel and QLineEdit inside a QWidget
+            row_widget = QWidget()
+            row_layout = QVBoxLayout(row_widget)
+
+            # Add Japanese Text
+            label_japanese = QLabel(f"Japanese Text: {row['Japanese']}", row_widget)
+            label_japanese.setWordWrap(True)
+            row_layout.addWidget(label_japanese)
+            
+            # Add Romaji
+            label_romaji = QLabel("Romaji: " + " ".join(row['Romaji']), row_widget)
+            label_romaji.setWordWrap(True)
+            row_layout.addWidget(label_romaji)
+            
+            # Add Translated Text
+            label_translated = QLabel(f"Translated Text: {row['Translated']}", row_widget)
+            label_translated.setWordWrap(True)
+            row_layout.addWidget(label_translated)
+
+            # Set the yellow background for the row widget
+            row_widget.setStyleSheet("background-color: rgb(219, 211, 189); border: 1px solid black; margin: 5px; padding: 5px;")
+
+            # Add the row to the main layout
+            self.ui.scrollArea_2.widget().layout().addWidget(row_widget)
+
     def pick_image_and_extract_dataframe(self):
-        ShareData.image_path, ShareData.df = pick_image_and_run_ocr(ShareData.username)
+        ShareData.image_path, df = pick_image_and_run_ocr(ShareData.username)
         self.display_image("./data/temp_image.jpg", self.ui.label_12)
         self.display_image("./out_image/showFinalImage.jpg", self.ui.Hasil_gambar)
-        self.ui.label_11.setText(add_rows_from_dataframe(self,ShareData.df))
+        self.add_rows_from_dataframe(df)
 
     def capture_image_and_extract_dataframe(self):
-        ShareData.image_path, ShareData.df = capture_camera_ocr(ShareData.username)
+        ShareData.image_path, df = capture_camera_ocr(ShareData.username)
         self.display_image("./data/temp_image.jpg", self.ui.label_12)
         self.display_image("./out_image/showFinalImage.jpg", self.ui.Hasil_gambar)
-        self.ui.label_11.setText(add_rows_from_dataframe(self,ShareData.df))
+        self.add_rows_from_dataframe(df)
 
         # Menampilkan gambar di label_8 (pastikan label_8 adalah QLabel)
     def display_image(self, image_path, label):
