@@ -35,7 +35,7 @@ def pick_image_and_run_ocr(username): # butuh username dari login page
     create_bar_graph(x, y) # function ini bakal ngeshow grafik juga, bikin box buat ini
     print("Translation succeed")
     
-    return saved_path
+    return saved_path,df2
 
 def save_image_decision(choice, saved_path): 
     # ini buat pop up mau ngesave atau gak, ini harus jalan setelah pick image/capture image and run ocr
