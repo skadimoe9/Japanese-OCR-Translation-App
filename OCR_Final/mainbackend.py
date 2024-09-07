@@ -13,7 +13,7 @@ def pick_image_and_run_ocr(username): # butuh username dari login page
             print("No image selected.")
             break
     if type(image_path) == int:
-        return None
+        return None,None
 
     temp_path = "./data/temp_image.jpg" 
     if not("temp_image.jpg" in image_path and "temp_image.jpg" in temp_path) :
@@ -62,7 +62,11 @@ def capture_camera_ocr(username):
     # dijalanin bareng save image, urutannya ini dluan, buat capture image dan run ocr
     # tolong tambahin teks "click 'c' to capture image and 'q' to quit" di UI
     try:
-        image_path = capture_picture() 
+        image_path = capture_picture()
+
+        if not image_path:
+            return None, None
+
         df2 = process_image(image_path)
 
         saved_path = draw_translated_text(image_path, df2) # function ini bakal ngeshow gambar bikin box buat ini

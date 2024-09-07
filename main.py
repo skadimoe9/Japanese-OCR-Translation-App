@@ -216,9 +216,9 @@ class Menu(QMainWindow):
         self.ui.Signout_Button_1.clicked.connect(self.close)
         self.ui.Signout_Button_2.clicked.connect(self.close)
 
-        self.ui.pushButton_7.clicked.connect(lambda:(self.pick_image_and_extract_dataframe(),PageNavigator.GoToResult(self),self.show_yes_no_dialog()))
+        self.ui.pushButton_7.clicked.connect(lambda:(self.pick_image_and_extract_dataframe()))
 
-        self.ui.pushButton_14.clicked.connect(lambda:(DialogBox.show_confirmation_dialog(self),self.capture_image_and_extract_dataframe(),PageNavigator.GoToResult(self),self.show_yes_no_dialog()))
+        self.ui.pushButton_14.clicked.connect(lambda:(DialogBox.show_confirmation_dialog(self),self.capture_image_and_extract_dataframe()))
         
         # Connect button_14 to open the confirmation dialog
         self.ui.frame_3.setHidden(True)
@@ -250,6 +250,9 @@ class Menu(QMainWindow):
             msg_box.exec_()
 
     def add_rows_from_dataframe(self, df):
+        if df is None:
+            return
+
         for index, row in df.iterrows():
             if row['Translated'] is None:
                 continue    
@@ -281,15 +284,25 @@ class Menu(QMainWindow):
 
     def pick_image_and_extract_dataframe(self):
         ShareData.image_path, df = pick_image_and_run_ocr(ShareData.username)
+        if ShareData.df is None:
+            return
+
         self.display_image("./data/temp_image.jpg", self.ui.label_12)
         self.display_image("./out_image/showFinalImage.jpg", self.ui.Hasil_gambar)
         self.add_rows_from_dataframe(df)
+        PageNavigator.GoToResult(self)
+        self.show_yes_no_dialog()
 
     def capture_image_and_extract_dataframe(self):
         ShareData.image_path, df = capture_camera_ocr(ShareData.username)
+        if ShareData.df is None:
+            return
+
         self.display_image("./data/temp_image.jpg", self.ui.label_12)
         self.display_image("./out_image/showFinalImage.jpg", self.ui.Hasil_gambar)
         self.add_rows_from_dataframe(df)
+        PageNavigator.GoToResult(self)
+        self.show_yes_no_dialog()
 
         # Menampilkan gambar di label_8 (pastikan label_8 adalah QLabel)
     def display_image(self, image_path, label):
