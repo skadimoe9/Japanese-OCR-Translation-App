@@ -53,7 +53,7 @@ def capture_picture():
     cap = cv2.VideoCapture(0)  # 0 is usually the default camera
 
     # Wait a moment to allow the camera to initialize
-    time.sleep(2)
+    #time.sleep(2)
 
     #open camera view
     while True:
