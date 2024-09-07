@@ -133,7 +133,7 @@ class Ui_SplashScreen(object):
         self.Description.setText(_translate("SplashScreen", "<Strong> OCR </Strong> Learning App"))
         self.Loading.setText(_translate("SplashScreen", "<html><head/><body><p align=\"center\"><span style=\" font-size:7pt;\">Loading ..</span></p></body></html>"))
         self.label_5.setText(_translate("SplashScreen", "<Strong>Created by</Strong> Dicky,F4TH,DADO"))
-import Resources
+import GUI_Final.Resources
 
 
 if __name__ == "__main__":

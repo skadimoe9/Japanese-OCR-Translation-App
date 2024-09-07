@@ -594,7 +594,7 @@ class Ui_Menu(object):
         self.label_7.setText(_translate("Menu", "Hello !"))
         self.label_10.setText(_translate("Menu", "User ID"))
         self.label_9.setText(_translate("Menu", "Username"))
-import Resources
+import GUI_Final.Resources
 
 
 if __name__ == "__main__":

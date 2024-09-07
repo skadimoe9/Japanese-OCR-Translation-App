@@ -713,7 +713,7 @@ class Ui_Intro(object):
         self.label_12.setText(_translate("Intro", "Coba"))
         self.label_13.setText(_translate("Intro", "MOHON MAAF KAMI "))
         self.label_14.setText(_translate("Intro", "TIDAK PUBLIK"))
-import Resources
+import GUI_Final.Resources
 
 
 if __name__ == "__main__":

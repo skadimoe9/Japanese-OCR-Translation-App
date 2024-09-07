@@ -4,6 +4,7 @@ from PyQt5 import QtCore
 from PyQt5.QtGui import QColor, QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGraphicsDropShadowEffect, QLabel, QPushButton, QVBoxLayout
 from OCR_Final.mainbackend import login_and_load_profile, pick_image_and_run_ocr, capture_camera_ocr
+import OCR_Final.file_handling
 from OCR_Final.ocr import delete_saved_image
 
 
@@ -211,10 +212,9 @@ class Menu(QMainWindow):
         """Handle the resizing of the window to adjust image scaling."""
         super(Menu, self).resizeEvent(event)
         # Refresh the image size when the window is resized
-        self.display_image(".\\data\\temp_image.jpg", self.ui.label_12)
-        self.display_image(".\\graph\\datalog.png", self.ui.label_8)
-        self.display_image(".\\out_image\\showFinalImage.jpg", self.ui.Hasil_gambar)
-
+        self.display_image("./data/temp_image.jpg", self.ui.label_12)
+        self.display_image("./graph/datalog.png", self.ui.label_8)
+        self.display_image("./out_image/showFinalImage.jpg", self.ui.Hasil_gambar)
 
 
 if __name__ == "__main__":

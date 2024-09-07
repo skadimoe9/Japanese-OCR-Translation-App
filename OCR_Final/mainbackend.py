@@ -1,8 +1,7 @@
-from file_handling import select_image_file, create_bar_graph, fetch_graphing_data, copy_file, capture_picture
-from ocr import process_image, draw_translated_text, delete_saved_image 
-from datalog import separate_and_count_characters
-from server import login, register, update_daily_data
-import time
+from OCR_Final.file_handling import select_image_file, create_bar_graph, fetch_graphing_data, copy_file, capture_picture
+from OCR_Final.ocr import process_image, draw_translated_text, delete_saved_image 
+from OCR_Final.datalog import separate_and_count_characters
+from OCR_Final.server import login, register, update_daily_data
 
 # Buat button untuk milih gambar yang mau ditranslate
 def pick_image_and_run_ocr(username): # butuh username dari login page
@@ -17,7 +16,7 @@ def pick_image_and_run_ocr(username): # butuh username dari login page
         return None
 
     temp_path = "./data/temp_image.jpg" 
-    if image_path != temp_path:
+    if "temp_image.jpg" in image_path and "temp_image.jpg" in temp_path:
         copy_file(image_path,temp_path)
     df2 = process_image(temp_path)
 
