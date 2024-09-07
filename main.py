@@ -4,7 +4,7 @@ import pandas as pd
 from PyQt5 import QtCore
 from PyQt5.QtGui import QColor, QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGraphicsDropShadowEffect, QLabel, QPushButton, QVBoxLayout, QMessageBox, QWidget
-from OCR_Final.mainbackend import login_and_load_profile, pick_image_and_run_ocr, capture_camera_ocr
+from OCR_Final.mainbackend import login_and_load_profile, pick_image_and_run_ocr, capture_camera_ocr, save_image_decision
 from OCR_Final.file_handling import delete_file
 from OCR_Final.ocr import delete_saved_image
 
@@ -72,6 +72,7 @@ class DialogBox(QDialog):
 
     def SaveConfirmation(self):
         self.ui.stackedWidget.setCurrentIndex(1)
+
 
 
 class SplashScreen(QMainWindow):
@@ -210,12 +211,38 @@ class Menu(QMainWindow):
         self.ui.Signout_Button_1.clicked.connect(self.close)
         self.ui.Signout_Button_2.clicked.connect(self.close)
 
-        self.ui.pushButton_7.clicked.connect(lambda:(self.pick_image_and_extract_dataframe(),PageNavigator.GoToResult(self)))
+        self.ui.pushButton_7.clicked.connect(lambda:(self.pick_image_and_extract_dataframe(),PageNavigator.GoToResult(self),self.show_yes_no_dialog()))
 
-        self.ui.pushButton_14.clicked.connect(lambda:(DialogBox.show_confirmation_dialog(self),self.capture_image_and_extract_dataframe(),PageNavigator.GoToResult(self)))
+        self.ui.pushButton_14.clicked.connect(lambda:(DialogBox.show_confirmation_dialog(self),self.capture_image_and_extract_dataframe(),PageNavigator.GoToResult(self),self.show_yes_no_dialog()))
         
         # Connect button_14 to open the confirmation dialog
         self.ui.frame_3.setHidden(True)
+
+    def show_yes_no_dialog(self):
+        msg_box = QMessageBox()
+        msg_box.setIcon(QMessageBox.Question)
+        msg_box.setText("Do you want to save image with translated text?")
+        msg_box.setWindowTitle("Confirmation")
+        msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        msg_box.setDefaultButton(QMessageBox.No)
+        response = msg_box.exec_()
+
+        if response == QMessageBox.Yes:
+            save_image_decision(1, ShareData.image_path)
+            msg_box = QMessageBox()
+            msg_box.setIcon(QMessageBox.Information)
+            msg_box.setText(f"Image saved")
+            msg_box.setWindowTitle("Alert")
+            msg_box.setStandardButtons(QMessageBox.Ok)
+            msg_box.exec_()
+        else:
+            save_image_decision(0, ShareData.image_path)
+            msg_box = QMessageBox()
+            msg_box.setIcon(QMessageBox.Information)
+            msg_box.setText(f"Image not saved")
+            msg_box.setWindowTitle("Alert")
+            msg_box.setStandardButtons(QMessageBox.Ok)
+            msg_box.exec_()
 
     def add_rows_from_dataframe(self, df):
         for index, row in df.iterrows():
