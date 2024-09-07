@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGraphicsDropSha
 from OCR_Final.mainbackend import login_and_load_profile, pick_image_and_run_ocr, capture_camera_ocr
 from OCR_Final.file_handling import delete_file
 from OCR_Final.ocr import delete_saved_image
-#from GUI_Final.Hasil import add_rows_from_dataframe
+from GUI_Final.Hasil import add_rows_from_dataframe
 
 
 # --> Splash Screen
@@ -54,6 +54,7 @@ class ShareData:
     username = None
     user_id = None
     df = None
+    image_path = None
 
 class DialogBox(QDialog):
     def __init__(self, parent=None):
@@ -208,12 +209,25 @@ class Menu(QMainWindow):
 
         self.ui.Signout_Button_1.clicked.connect(self.close)
         self.ui.Signout_Button_2.clicked.connect(self.close)
-        self.ui.pushButton_7.clicked.connect(x = lambda :(pick_image_and_run_ocr(ShareData.username),PageNavigator.GoToResult(self)))
-        self.ui.pushButton_14.clicked.connect(lambda:(DialogBox.show_confirmation_dialog(self),capture_camera_ocr(ShareData.username),PageNavigator.GoToResult(self)))
-        print(x[0])
+
+        self.ui.pushButton_7.clicked.connect(lambda:(self.pick_image_and_extract_dataframe(),PageNavigator.GoToResult(self)))
+
+        self.ui.pushButton_14.clicked.connect(lambda:(DialogBox.show_confirmation_dialog(self),self.capture_image_and_extract_dataframe(),PageNavigator.GoToResult(self)))
+        
         # Connect button_14 to open the confirmation dialog
-#        self.ui.label_11.setText(add_rows_from_dataframe(self,ShareData.df))
         self.ui.frame_3.setHidden(True)
+
+    def pick_image_and_extract_dataframe(self):
+        ShareData.image_path, ShareData.df = pick_image_and_run_ocr(ShareData.username)
+        self.display_image("./data/temp_image.jpg", self.ui.label_12)
+        self.display_image("./out_image/showFinalImage.jpg", self.ui.Hasil_gambar)
+        self.ui.label_11.setText(add_rows_from_dataframe(self,ShareData.df))
+
+    def capture_image_and_extract_dataframe(self):
+        ShareData.image_path, ShareData.df = capture_camera_ocr(ShareData.username)
+        self.display_image("./data/temp_image.jpg", self.ui.label_12)
+        self.display_image("./out_image/showFinalImage.jpg", self.ui.Hasil_gambar)
+        self.ui.label_11.setText(add_rows_from_dataframe(self,ShareData.df))
 
         # Menampilkan gambar di label_8 (pastikan label_8 adalah QLabel)
     def display_image(self, image_path, label):

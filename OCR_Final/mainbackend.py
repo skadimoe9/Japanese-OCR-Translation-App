@@ -61,9 +61,6 @@ def login_and_load_profile(username, password): # buat login
 def capture_camera_ocr(username): 
     # dijalanin bareng save image, urutannya ini dluan, buat capture image dan run ocr
     # tolong tambahin teks "click 'c' to capture image and 'q' to quit" di UI
-    image_path = capture_picture()
-    if image_path == False:
-        return None 
     try:
         image_path = capture_picture() 
         df2 = process_image(image_path)
@@ -82,11 +79,11 @@ def capture_camera_ocr(username):
         x, y = fetch_graphing_data(username)
         create_bar_graph(x, y) # function ini bakal ngeshow grafik juga bikin box buat ini
         print("Translation succeed")
-        return saved_path
+        return saved_path, df2
     
     except TypeError :
         print("No character detected")
-        return None 
+        return None, None 
 
 
 # Tolong buat ketika klik tombol buat pick image dan ngerun OCR, nanti setelah function itu selesai 
