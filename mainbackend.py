@@ -17,7 +17,8 @@ def pick_image_and_run_ocr(username): # butuh username dari login page
         return None
 
     temp_path = "./data/temp_image.jpg" 
-    copy_file(image_path,temp_path)
+    if image_path != temp_path:
+        copy_file(image_path,temp_path)
     df2 = process_image(temp_path)
 
     saved_path = draw_translated_text(temp_path, df2) 
@@ -82,7 +83,6 @@ def capture_camera_ocr(username):
         x, y = fetch_graphing_data(username)
         create_bar_graph(x, y) # function ini bakal ngeshow grafik juga bikin box buat ini
         print("Translation succeed")
-        GoToResult()
         return saved_path
     
     except TypeError :
