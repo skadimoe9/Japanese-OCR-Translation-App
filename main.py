@@ -1,9 +1,10 @@
 import sys
 import os
 from PyQt5 import QtCore
-from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsDropShadowEffect, QGraphicsView, QGraphicsScene
-from mainbackend import login_and_load_profile, pick_image_and_run_ocr,capture_camera_ocr
+from PyQt5.QtGui import QColor, QPixmap
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsDropShadowEffect, QGraphicsScene
+
+from mainbackend import login_and_load_profile, pick_image_and_run_ocr, capture_camera_ocr
 from ocr import delete_saved_image
 
 # --> Splash Screen
@@ -89,7 +90,6 @@ class Intro(QMainWindow):
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentIndex(0)
 
-
         # Fungsi untuk ke berbagai macam halaman
         self.ui.GoToHome.clicked.connect(lambda: GoToHome(self))
         self.ui.GoToInfo.clicked.connect(lambda: GoToInfo(self))
@@ -117,20 +117,11 @@ class Intro(QMainWindow):
         ShareData.username = self.ui.inputUsername.text()
         password = self.ui.inputPassword.text()
 
-        status,ShareData.user_id = login_and_load_profile(ShareData.username, password)
+        status, ShareData.user_id = login_and_load_profile(ShareData.username, password)
         # Memastikan login dengan menggunakan mainbackend
         if status:
             self.menu_window = Menu()  
             self.menu_window.show()
-
-            # Membuat dan menginisialisasi QGraphicsScene
-            scene = QGraphicsScene()
-
-            # Misalnya, kita tambahkan item ke dalam scene (contoh: persegi panjang)
-            scene.addRect(10, 10, 100, 100)
-
-            # Menetapkan scene ke graphicsView dari UI Menu
-            self.menu_window.ui.graphicsView.setScene(scene) 
 
             # Menutup jendela login
             self.close()
@@ -171,12 +162,17 @@ class Menu(QMainWindow):
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentIndex(0)
 
+        # Menampilkan username dan user_id
+        self.ui.Username_Box.setText(f"{ShareData.username}")
+        self.ui.userID_box.setText(f"{ShareData.user_id}")
+
         # Fungsi untuk ke berbagai macam halaman
         self.ui.Home_Button_1.clicked.connect(lambda: PageNavigator.GoToHome(self))
         self.ui.Home_button_2.clicked.connect(lambda: PageNavigator.GoToHome(self))
 
         self.ui.profile_Button_1.clicked.connect(lambda: PageNavigator.GoToProfile(self))
         self.ui.Profile_button_1.clicked.connect(lambda: PageNavigator.GoToProfile(self))
+        self.ui.pushButton_2.clicked.connect(lambda: PageNavigator.GoToProfile(self))
 
         self.ui.Setting_Button_1.clicked.connect(lambda: PageNavigator.GoToSettings(self))
         self.ui.Settings_button_2.clicked.connect(lambda: PageNavigator.GoToSettings(self))
@@ -184,14 +180,32 @@ class Menu(QMainWindow):
         self.ui.Signout_Button_1.clicked.connect(self.close)
         self.ui.Signout_Button_2.clicked.connect(self.close)
 
-        self.ui.pushButton_7.clicked.connect(lambda:pick_image_and_run_ocr(ShareData.username))
-        self.ui.pushButton_14.clicked.connect(lambda:capture_camera_ocr(ShareData.username))
+        self.ui.pushButton_7.clicked.connect(lambda: pick_image_and_run_ocr(ShareData.username))
+        self.ui.pushButton_14.clicked.connect(lambda: capture_camera_ocr(ShareData.username))
 
-        # Hapus atau ubah jika frame_3 tidak ada di UI Designer
-        try:
-            self.ui.frame_3.setHidden(True)
-        except AttributeError:
-            print("frame_3 tidak ada di file UI")
+        # Menampilkan gambar di label_8 (pastikan label_8 adalah QLabel)
+        self.display_image(".\\out_image\\showfinalimage.jpg")
+
+    def display_image(self, image_path):
+        """Function to display and scale image."""
+        if os.path.exists(image_path):
+            final_image = QPixmap(image_path)
+            # Scale the image to fit the label dimensions
+            scaled_pixmap = final_image.scaled(
+                self.ui.label_8.width(),
+                self.ui.label_8.height(),
+                QtCore.Qt.KeepAspectRatio,
+                QtCore.Qt.SmoothTransformation
+            )
+            self.ui.label_8.setPixmap(scaled_pixmap)
+        else:
+            print("Path gambar tidak ditemukan")
+
+    def resizeEvent(self, event):
+        """Handle the resizing of the window to adjust image scaling."""
+        super(Menu, self).resizeEvent(event)
+        # Refresh the image size when the window is resized
+        self.display_image(".\\out_image\\showfinalimage.jpg")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
