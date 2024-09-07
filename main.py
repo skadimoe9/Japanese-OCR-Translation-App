@@ -247,7 +247,7 @@ class Menu(QMainWindow):
             msg_box.setText(f"Image not saved")
             msg_box.setWindowTitle("Alert")
             msg_box.setStandardButtons(QMessageBox.Ok)
-            msg_box.exec_()
+            msg_box.exec_() 
 
     def add_rows_from_dataframe(self, df):
         if df is None:
