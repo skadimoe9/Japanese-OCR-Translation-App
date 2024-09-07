@@ -212,6 +212,7 @@ class Menu(QMainWindow):
         """Handle the resizing of the window to adjust image scaling."""
         super(Menu, self).resizeEvent(event)
         # Refresh the image size when the window is resized
+        self.display_image("./data/temp_image.jpg", self.ui.label_12)
         self.display_image("./graph/datalog.png", self.ui.label_8)
         self.display_image("./out_image/showFinalImage.jpg", self.ui.Hasil_gambar)
 
