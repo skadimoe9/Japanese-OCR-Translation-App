@@ -1,6 +1,8 @@
 import sys
 import os
 import pandas as pd
+import
+
 from PyQt5 import QtCore
 from PyQt5.QtGui import QColor, QPixmap, QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGraphicsDropShadowEffect, QLabel, QPushButton, QVBoxLayout, QMessageBox, QWidget
@@ -191,6 +193,8 @@ class Menu(QMainWindow):
         self.ui = Ui_Menu()
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentIndex(0)
+        self.setWindowTitle("日本語 OCR Translator")
+        self.setWindowIcon(QIcon('./file_resources/logo_app_japaneseocr.png'))
 
         # Menampilkan username dan user_id
         self.ui.Username_Box.setText(f"{ShareData.username}")
