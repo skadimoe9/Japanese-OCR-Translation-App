@@ -3,16 +3,16 @@ import os
 from PyQt5 import QtCore
 from PyQt5.QtGui import QColor, QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGraphicsDropShadowEffect, QLabel, QPushButton, QVBoxLayout
-from mainbackend import login_and_load_profile, pick_image_and_run_ocr, capture_camera_ocr
-import Hasil
-from ocr import delete_saved_image
+from OCR_Final.mainbackend import login_and_load_profile, pick_image_and_run_ocr, capture_camera_ocr
+from OCR_Final.ocr import delete_saved_image
+
 
 # --> Splash Screen
-from Splash_Screen import Ui_SplashScreen
-from Login_info import Ui_Intro
-from Menu import Ui_Menu
-from server import register
-from Dialog import Ui_Form
+from GUI_Final.Splash_Screen import Ui_SplashScreen
+from GUI_Final.Login_info import Ui_Intro
+from GUI_Final.Menu import Ui_Menu
+from OCR_Final.server import register
+from GUI_Final.Dialog import Ui_Form
 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
 os.environ['QT_SCREEN_SCALE_FACTORS'] = '1'
