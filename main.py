@@ -2,7 +2,7 @@ import sys
 import os
 import pandas as pd
 from PyQt5 import QtCore
-from PyQt5.QtGui import QColor, QPixmap
+from PyQt5.QtGui import QColor, QPixmap, QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGraphicsDropShadowEffect, QLabel, QPushButton, QVBoxLayout, QMessageBox, QWidget
 from OCR_Final.mainbackend import login_and_load_profile, pick_image_and_run_ocr, capture_camera_ocr
 from OCR_Final.file_handling import delete_file
@@ -116,6 +116,8 @@ class Intro(QMainWindow):
         self.ui = Ui_Intro()
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentIndex(0)
+        self.setWindowTitle("日本語 OCR Translator")
+        self.setWindowIcon(QIcon('./file_resources/logo_app_japaneseocr.png'))
 
         # Fungsi untuk ke berbagai macam halaman
         self.ui.GoToHome.clicked.connect(lambda: GoToHome(self))
@@ -280,6 +282,7 @@ class Menu(QMainWindow):
         super(Menu, self).resizeEvent(event)
         # Refresh the image size when the window is resized
         self.display_image("./data/temp_image.jpg", self.ui.label_12)
+        self.ui.label_8.setAlignment(QtCore.Qt.AlignCenter)
         self.display_image("./graph/datalog.png", self.ui.label_8)
         self.display_image("./out_image/showFinalImage.jpg", self.ui.Hasil_gambar)
 
