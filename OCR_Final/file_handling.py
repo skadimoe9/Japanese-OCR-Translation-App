@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import mplcursors
 import sqlite3
 import os 
-from server import get_daily_data
+from OCR_Final.server import get_daily_data
 import numpy as np
 import tkinter as tk
 from tkinter import filedialog
