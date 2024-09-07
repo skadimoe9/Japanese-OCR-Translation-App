@@ -7,6 +7,7 @@ import datetime
 from paddleocr import PaddleOCR
 from sudachipy import tokenizer,dictionary
 from deep_translator import GoogleTranslator
+import logging
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
@@ -14,6 +15,8 @@ pd.set_option('display.max_rows', None)
 # buat output directory untuk save file
 output_dir = "data"
 os.makedirs(output_dir, exist_ok=True)
+
+logging.getLogger('ppocr').setLevel(logging.WARNING)
 
 ocr = PaddleOCR(use_angle_cls=True, 
                 lang='japan', 

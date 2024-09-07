@@ -16,10 +16,8 @@ def pick_image_and_run_ocr(username): # butuh username dari login page
         return None
     df2 = process_image(image_path)
 
-    print(df2) # function ini bakal ngeprint dataframe, tolong bikin textbox buat ini
-
-    saved_path = draw_translated_text(image_path, df2) # function ini bakal ngeshow gambar, bikin box buat ini
-    image_to_show = "./out_image/showfinalimage.jpg"
+    saved_path = draw_translated_text(image_path, df2) 
+    image_to_show = "./out_image/showfinalimage.jpg" # Ini ditampilin di hasil
     copy_file(saved_path, image_to_show)
 
     characters, tstamps = separate_and_count_characters(df2)
@@ -52,8 +50,10 @@ def login_and_load_profile(username, password): # buat login
         print('Login success')
         x, y = fetch_graphing_data(username)
         create_bar_graph(x, y) # function ini bakal ngesave/show grafik user saat ini
+        return True, user_id
     else:
         print('Login failed')
+        return False, None
 
 def capture_camera_ocr(username): 
     # dijalanin bareng save image, urutannya ini dluan, buat capture image dan run ocr
@@ -62,9 +62,8 @@ def capture_camera_ocr(username):
     if image_path == False:
         return None 
     try:
+        image_path = capture_picture() 
         df2 = process_image(image_path)
-
-        print(df2) # function ini bakal ngeprint dataframe, tolong bikin textbox buat ini
 
         saved_path = draw_translated_text(image_path, df2) # function ini bakal ngeshow gambar bikin box buat ini
         image_to_show = "./out_image/showfinalimage.jpg"
@@ -88,6 +87,10 @@ def capture_camera_ocr(username):
         return None 
 
 def print_results_to_textbox(df):
+    tl_text = ""
+    for translated_texts in df['Translated']:
+        tl_text = tl_text + " " + translated_texts
+    print(tl_text)
     for index, row in df.iterrows():
         if row['Translated'] == None:
             continue
@@ -102,7 +105,8 @@ def print_results_to_textbox(df):
         print("Translated Text")
         print(row['Translated'])
         print() 
-
+        
+        print(f"{row['Translated']} ")
 
 # Tolong buat ketika klik tombol buat pick image dan ngerun OCR, nanti setelah function itu selesai 
 # bakal ada pop up yang nanya mau save gambar atau nggak, kalo iya nanti choice = 1, dan kalau gak 
@@ -110,6 +114,6 @@ def print_results_to_textbox(df):
 # itu asalnya dari return function pick_image_and_run_ocr 
 
 # Example
-#pathfiles = capture_camera_ocr("admin1")
-pathfiles = pick_image_and_run_ocr("admin1")
-save_image_decision(0, pathfiles)
+# pathfiles = capture_camera_ocr("admin1")
+# pathfiles = pick_image_and_run_ocr("admin1")
+# save_image_decision(0, pathfiles)

@@ -32,8 +32,8 @@ conn.commit()
 
 # Create a socket object
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind(('localhost', 9999))  #can be set to local IP address if used in a network
-server.listen()
+#server.bind(('localhost', 9999))  #can be set to local IP address if used in a network
+#server.listen()
 
 def register(username, password):
     hashed_password = hashlib.sha256(password.encode()).hexdigest()
