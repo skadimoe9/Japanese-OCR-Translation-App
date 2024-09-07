@@ -4,7 +4,7 @@ from PyQt5 import QtCore
 from PyQt5.QtGui import QColor, QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGraphicsDropShadowEffect, QLabel, QPushButton, QVBoxLayout
 from OCR_Final.mainbackend import login_and_load_profile, pick_image_and_run_ocr, capture_camera_ocr
-import OCR_Final.file_handling
+from OCR_Final.file_handling import delete_file
 from OCR_Final.ocr import delete_saved_image
 
 
@@ -18,6 +18,7 @@ from GUI_Final.Dialog import Ui_Form
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
 os.environ['QT_SCREEN_SCALE_FACTORS'] = '1'
 os.environ['QT_SCALE_FACTOR'] = '1'
+delete_file()
 
 # --> Global
 counter = 0
@@ -51,6 +52,20 @@ class PageNavigator:
 class ShareData:
     username = None
     user_id = None
+
+class DialogBox(QDialog):
+    def __init__(self, parent=None):
+        super(DialogBox, self).__init__(parent)
+        self.ui = Ui_Form()  # Use the UI from Dialog
+        self.ui.setupUi(self)
+
+    def ImageConfirmation(self):
+        self.ui.stackedWidget.setCurrentIndex(0)
+        # Gunakan lambda atau partial untuk memanggil fungsi saat tombol diklik
+        self.ui.pushButton_3.clicked.connect(lambda: pick_image_and_run_ocr(ShareData.username))
+
+    def SaveConfirmation(self):
+        self.ui.stackedWidget.setCurrentIndex(1)
 
 
 class SplashScreen(QMainWindow):
@@ -183,14 +198,17 @@ class Menu(QMainWindow):
         self.ui.Setting_Button_1.clicked.connect(lambda: PageNavigator.GoToSettings(self))
         self.ui.Settings_button_2.clicked.connect(lambda: PageNavigator.GoToSettings(self))
 
+        self.ui.pushButton_4.clicked.connect(lambda:PageNavigator.GoToResult(self))
+        self.ui.pushButton_5.clicked.connect(lambda:PageNavigator.GoToResult(self))
+
         self.ui.Signout_Button_1.clicked.connect(self.close)
         self.ui.Signout_Button_2.clicked.connect(self.close)
-        self.ui.pushButton_7.clicked.connect(lambda:(pick_image_and_run_ocr(ShareData.username),PageNavigator.GoToResult(self)))
+        self.ui.pushButton_7.clicked.connect(lambda:(DialogBox.ImageConfirmation(self),PageNavigator.GoToResult(self)))
         self.ui.pushButton_14.clicked.connect(lambda:(capture_camera_ocr(ShareData.username),PageNavigator.GoToResult(self)))
         # Connect button_14 to open the confirmation dialog
 
-
         self.ui.frame_3.setHidden(True)
+
 
         # Menampilkan gambar di label_8 (pastikan label_8 adalah QLabel)
     def display_image(self, image_path, label):

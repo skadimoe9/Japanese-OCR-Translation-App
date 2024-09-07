@@ -16,7 +16,7 @@ def pick_image_and_run_ocr(username): # butuh username dari login page
         return None
 
     temp_path = "./data/temp_image.jpg" 
-    if "temp_image.jpg" in image_path and "temp_image.jpg" in temp_path:
+    if not("temp_image.jpg" in image_path and "temp_image.jpg" in temp_path) :
         copy_file(image_path,temp_path)
     df2 = process_image(temp_path)
 

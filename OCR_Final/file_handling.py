@@ -113,26 +113,12 @@ def create_bar_graph(x,y):
     plt.savefig("./graph/" + filename)
 
 def delete_file():
-    # Delete files inside data folder
-    data_dir = "data"
-    for file in os.listdir(data_dir):
-        file_path = os.path.join(data_dir, file)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
-
-    # Delete files inside graph folder
-    graph_dir = "graph"
-    for file in os.listdir(graph_dir):
-        file_path = os.path.join(graph_dir, file)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
-
-    # Delete files inside out_image folder
-    out_image_dir = "out_image"
-    for file in os.listdir(out_image_dir):
-        file_path = os.path.join(out_image_dir, file)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
+    if os.path.isfile("./data/temp_image.jpg"):
+        os.remove("./data/temp_image.jpg")
+    if os.path.isfile("./out_image/showfinalimage.jpg"):
+        os.remove("./out_image/showfinalimage.jpg")  
+    if os.path.isfile("./graph/datalog.png"):
+        os.remove("./graph/datalog.png")     
 
 def fetch_graphing_data(username):
     # Connect to the SQLite database
