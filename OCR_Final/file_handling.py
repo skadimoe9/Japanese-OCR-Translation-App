@@ -97,12 +97,15 @@ def create_bar_graph(x,y):
 
     # Create bar graph
     plt.figure(figsize=(8, 4))
-    bars = plt.bar(x, y, color='#a84245', width=0.5)
+    bars = plt.bar(x, y, color='#dbd3bd', width=0.5)
 
     # Add title and labels
     plt.title("Kanji App Used")
     plt.xlabel("Date")
     plt.ylabel("Character(s) Translated") 
+
+    plt.gca().set_facecolor('#f0f0f0')  # Set axes background color
+    plt.gcf().set_facecolor('#c8c8c8')  # Set figure background color
     
     cursor = mplcursors.cursor(bars, hover=True)
     cursor.connect("add", lambda sel: sel.annotation.set_text(f'{y[sel.index]}'))
