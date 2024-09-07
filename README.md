@@ -330,17 +330,6 @@ Captures an image from the camera, runs the OCR process, and displays the transl
 saved_path = capture_camera_ocr('username')
 ```
 
-### 5. `print_results_to_textbox(df)`
-
-**Purpose:**  
-Prints the OCR results, including the Japanese text, Romaji, and translated text, to a text box (or console).
-
-**How to use:**
-```python
-df = process_image('image_path.jpg')
-print_results_to_textbox(df)
-```
-
 ---
 
 
