@@ -2,6 +2,7 @@ from file_handling import select_image_file, create_bar_graph, fetch_graphing_da
 from ocr import process_image, draw_translated_text, delete_saved_image 
 from datalog import separate_and_count_characters
 from server import login, register, update_daily_data
+import time
 
 # Buat button untuk milih gambar yang mau ditranslate
 def pick_image_and_run_ocr(username): # butuh username dari login page
@@ -14,9 +15,12 @@ def pick_image_and_run_ocr(username): # butuh username dari login page
             break
     if type(image_path) == int:
         return None
-    df2 = process_image(image_path)
 
-    saved_path = draw_translated_text(image_path, df2) 
+    temp_path = "./data/temp_image.jpg" 
+    copy_file(image_path,temp_path)
+    df2 = process_image(temp_path)
+
+    saved_path = draw_translated_text(temp_path, df2) 
     image_to_show = "./out_image/showfinalimage.jpg" # Ini ditampilin di hasil
     copy_file(saved_path, image_to_show)
 
@@ -27,7 +31,6 @@ def pick_image_and_run_ocr(username): # butuh username dari login page
     except:
         print("Error updating data.")
     
-    print_results_to_textbox(df2)
     x, y = fetch_graphing_data(username)
     create_bar_graph(x, y) # function ini bakal ngeshow grafik juga, bikin box buat ini
     print("Translation succeed")
@@ -76,37 +79,16 @@ def capture_camera_ocr(username):
         except:
             print("Error updating data.")
         
-        print_results_to_textbox(df2)
         x, y = fetch_graphing_data(username)
         create_bar_graph(x, y) # function ini bakal ngeshow grafik juga bikin box buat ini
         print("Translation succeed")
+        GoToResult()
         return saved_path
     
     except TypeError :
         print("No character detected")
         return None 
 
-def print_results_to_textbox(df):
-    tl_text = ""
-    for translated_texts in df['Translated']:
-        tl_text = tl_text + " " + translated_texts
-    print(tl_text)
-    for index, row in df.iterrows():
-        if row['Translated'] == None:
-            continue
-        print("Japanese Text")
-        print(row['Japanese'])
-        print()
-        print("Romaji")
-        for text in row['Romaji']:
-            print(text + " ", end="")
-        print()
-        print()
-        print("Translated Text")
-        print(row['Translated'])
-        print() 
-        
-        print(f"{row['Translated']} ")
 
 # Tolong buat ketika klik tombol buat pick image dan ngerun OCR, nanti setelah function itu selesai 
 # bakal ada pop up yang nanya mau save gambar atau nggak, kalo iya nanti choice = 1, dan kalau gak 

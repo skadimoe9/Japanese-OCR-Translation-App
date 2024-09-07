@@ -2,9 +2,9 @@ import sys
 import os
 from PyQt5 import QtCore
 from PyQt5.QtGui import QColor, QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsDropShadowEffect, QGraphicsScene
-
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGraphicsDropShadowEffect, QLabel, QPushButton, QVBoxLayout
 from mainbackend import login_and_load_profile, pick_image_and_run_ocr, capture_camera_ocr
+import Hasil
 from ocr import delete_saved_image
 
 # --> Splash Screen
@@ -12,6 +12,7 @@ from Splash_Screen import Ui_SplashScreen
 from Login_info import Ui_Intro
 from Menu import Ui_Menu
 from server import register
+from Dialog import Ui_Form
 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
 os.environ['QT_SCREEN_SCALE_FACTORS'] = '1'
@@ -42,10 +43,14 @@ class PageNavigator:
 
     def GoToSettings(main_window):
         main_window.ui.stackedWidget.setCurrentIndex(2)
+   
+    def GoToResult(main_window):
+        main_window.ui.stackedWidget.setCurrentIndex(1)
 
 class ShareData:
     username = None
     user_id = None
+
 
 class SplashScreen(QMainWindow):
     def __init__(self):
@@ -179,33 +184,37 @@ class Menu(QMainWindow):
 
         self.ui.Signout_Button_1.clicked.connect(self.close)
         self.ui.Signout_Button_2.clicked.connect(self.close)
+        self.ui.pushButton_7.clicked.connect(lambda:(pick_image_and_run_ocr(ShareData.username),PageNavigator.GoToResult(self)))
+        self.ui.pushButton_14.clicked.connect(lambda:(capture_camera_ocr(ShareData.username),PageNavigator.GoToResult(self)))
+        # Connect button_14 to open the confirmation dialog
 
-        self.ui.pushButton_7.clicked.connect(lambda: pick_image_and_run_ocr(ShareData.username))
-        self.ui.pushButton_14.clicked.connect(lambda: capture_camera_ocr(ShareData.username))
+
+        self.ui.frame_3.setHidden(True)
 
         # Menampilkan gambar di label_8 (pastikan label_8 adalah QLabel)
-        self.display_image(".\\out_image\\showfinalimage.jpg")
-
-    def display_image(self, image_path):
+    def display_image(self, image_path, label):
         """Function to display and scale image."""
         if os.path.exists(image_path):
             final_image = QPixmap(image_path)
             # Scale the image to fit the label dimensions
             scaled_pixmap = final_image.scaled(
-                self.ui.label_8.width(),
-                self.ui.label_8.height(),
+                label.width(),  # Sesuaikan dengan lebar label
+                label.height(),  # Sesuaikan dengan tinggi label
                 QtCore.Qt.KeepAspectRatio,
                 QtCore.Qt.SmoothTransformation
             )
-            self.ui.label_8.setPixmap(scaled_pixmap)
+            label.setPixmap(scaled_pixmap)  # Atur gambar di label
         else:
-            print("Path gambar tidak ditemukan")
+             print(f"Path gambar tidak ditemukan: {image_path}")
 
     def resizeEvent(self, event):
         """Handle the resizing of the window to adjust image scaling."""
         super(Menu, self).resizeEvent(event)
         # Refresh the image size when the window is resized
-        self.display_image(".\\out_image\\showfinalimage.jpg")
+        self.display_image(".\\graph\\datalog.png", self.ui.label_8)
+        self.display_image(".\\out_image\\showFinalImage.jpg", self.ui.Hasil_gambar)
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
