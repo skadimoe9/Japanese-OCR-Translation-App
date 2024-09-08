@@ -54,7 +54,6 @@ class PageNavigator:
 class ShareData:
     username = None
     user_id = None
-    df = None
     image_path = None
 
 class DialogBox(QDialog):
@@ -284,7 +283,7 @@ class Menu(QMainWindow):
 
     def pick_image_and_extract_dataframe(self):
         ShareData.image_path, df = pick_image_and_run_ocr(ShareData.username)
-        if ShareData.df is None:
+        if df is None:
             return
 
         self.display_image("./data/temp_image.jpg", self.ui.label_12)
@@ -295,9 +294,8 @@ class Menu(QMainWindow):
 
     def capture_image_and_extract_dataframe(self):
         ShareData.image_path, df = capture_camera_ocr(ShareData.username)
-        if ShareData.df is None:
+        if df is None:
             return
-
         self.display_image("./data/temp_image.jpg", self.ui.label_12)
         self.display_image("./out_image/showFinalImage.jpg", self.ui.Hasil_gambar)
         self.add_rows_from_dataframe(df)
