@@ -10,6 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QFont, QFontDatabase
+import sys
+import os
 
 
 class Ui_Intro(object):
@@ -32,8 +34,15 @@ class Ui_Intro(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
 
+        # Determine the base path for the font file
+        if hasattr(sys, '_MEIPASS'):
+            base_path = sys._MEIPASS
+        else:
+            base_path = os.path.abspath(".")
+
         # Load the custom font
-        font_id = QFontDatabase.addApplicationFont("GUI_Final/social_media_circled.ttf")
+        font_path = os.path.join(base_path, "fonts", "social_media_circled.ttf")
+        font_id = QFontDatabase.addApplicationFont(font_path)
         if font_id == -1:
             print("Failed to load font")
         else:
