@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QFont, QFontDatabase
 
 
 class Ui_Intro(object):
@@ -30,6 +31,15 @@ class Ui_Intro(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
+
+        # Load the custom font
+        font_id = QFontDatabase.addApplicationFont("GUI_Final/social_media_circled.ttf")
+        if font_id == -1:
+            print("Failed to load font")
+        else:
+            font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
+            print(f"Loaded font: {font_family}")
+
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.frame)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setSpacing(0)
@@ -143,7 +153,7 @@ class Ui_Intro(object):
         self.Login_button.setMaximumSize(QtCore.QSize(16777215, 40))
         font = QtGui.QFont()
         font.setFamily("MS Shell Dlg 2")
-        font.setPointSize(12)
+        font.setPointSize(1)
         font.setBold(True)
         font.setWeight(75)
         self.Login_button.setFont(font)
@@ -153,6 +163,7 @@ class Ui_Intro(object):
 "    background-color: rgb(240, 240, 240);  /* Warna latar belakang */\n"
 "    border-radius: 15px;  /* Membuat sudut tombol melengkung */\n"
 "    padding: 10px 20px;  /* Tambahkan padding untuk menambah ruang di dalam tombol */\n"
+"    font-size : 16px;\n"
 "}\n"
 "\n"
 "QPushButton#Login_button:hover {\n"
@@ -182,7 +193,7 @@ class Ui_Intro(object):
         self.Google.setMaximumSize(QtCore.QSize(30, 30))
         font = QtGui.QFont()
         font.setFamily("Social Media Circled")
-        font.setPointSize(22)
+        font.setPointSize(16)
         self.Google.setFont(font)
         self.Google.setStyleSheet("QPushButton#Google{\n"
 "color : rgba(0,0,0,1);\n"
@@ -198,7 +209,7 @@ class Ui_Intro(object):
         self.WA.setMaximumSize(QtCore.QSize(30, 30))
         font = QtGui.QFont()
         font.setFamily("Social Media Circled")
-        font.setPointSize(20)
+        font.setPointSize(16)
         self.WA.setFont(font)
         self.WA.setStyleSheet("QPushButton#WA{\n"
 "color : rgba(0,0,0,1);\n"
@@ -214,7 +225,7 @@ class Ui_Intro(object):
         self.Youtube.setMaximumSize(QtCore.QSize(30, 30))
         font = QtGui.QFont()
         font.setFamily("Social Media Circled")
-        font.setPointSize(20)
+        font.setPointSize(16)
         self.Youtube.setFont(font)
         self.Youtube.setStyleSheet("QPushButton#Youtube{\n"
 "color : rgba(0,0,0,1);\n"
@@ -230,7 +241,7 @@ class Ui_Intro(object):
         self.Discord.setMaximumSize(QtCore.QSize(30, 30))
         font = QtGui.QFont()
         font.setFamily("Social Media Circled")
-        font.setPointSize(20)
+        font.setPointSize(16)
         self.Discord.setFont(font)
         self.Discord.setStyleSheet("QPushButton#Discord{\n"
 "color : rgba(0,0,0,1);\n"
@@ -331,7 +342,7 @@ class Ui_Intro(object):
         self.RegisterButton = QtWidgets.QPushButton(self.frame_5)
         self.RegisterButton.setMaximumSize(QtCore.QSize(16777215, 40))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(1)
         self.RegisterButton.setFont(font)
         self.RegisterButton.setStyleSheet("QPushButton#RegisterButton{\n"
 "    color: rgba(0, 0, 0, 0.7);  /* Warna teks dengan transparansi 70% */\n"
@@ -339,7 +350,7 @@ class Ui_Intro(object):
 "    background-color: rgb(240, 240, 240);  /* Warna latar belakang */\n"
 "    border-radius: 15px;  /* Membuat sudut tombol melengkung */\n"
 "    padding: 10px 20px;  /* Tambahkan padding untuk menambah ruang di dalam tombol */\n"
-"    font-size : 18px;\n"
+"    font-size : 16px;\n"
 "}\n"
 "\n"
 "QPushButton#RegisterButton:hover{\n"
@@ -373,7 +384,7 @@ class Ui_Intro(object):
         self.Google_1.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
         font.setFamily("Social Media Circled")
-        font.setPointSize(22)
+        font.setPointSize(16)
         self.Google_1.setFont(font)
         self.Google_1.setStyleSheet("QPushButton#Google_1{\n"
 "color : rgba(0,0,0,1);\n"
@@ -390,7 +401,7 @@ class Ui_Intro(object):
         self.WA_1.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
         font.setFamily("Social Media Circled")
-        font.setPointSize(22)
+        font.setPointSize(16)
         self.WA_1.setFont(font)
         self.WA_1.setStyleSheet("QPushButton#WA_1{\n"
 "color : rgba(0,0,0,1);\n"
@@ -406,7 +417,7 @@ class Ui_Intro(object):
         self.YT_1.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
         font.setFamily("Social Media Circled")
-        font.setPointSize(22)
+        font.setPointSize(16)
         self.YT_1.setFont(font)
         self.YT_1.setStyleSheet("QPushButton#YT_1{\n"
 "color : rgba(0,0,0,1);\n"
@@ -422,7 +433,7 @@ class Ui_Intro(object):
         self.DC_1.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
         font.setFamily("Social Media Circled")
-        font.setPointSize(22)
+        font.setPointSize(16)
         self.DC_1.setFont(font)
         self.DC_1.setStyleSheet("QPushButton#DC_1{\n"
 "color : rgba(0,0,0,1);\n"
@@ -641,6 +652,7 @@ class Ui_Intro(object):
         self.gridLayout_3.addWidget(self.frame, 1, 0, 1, 1)
         self.frame_2 = QtWidgets.QFrame(self.centralwidget)
         self.frame_2.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.frame_2.setMinimumSize(QtCore.QSize(376, 40))
         self.frame_2.setStyleSheet("background-color: rgb(133, 133, 133);")
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
