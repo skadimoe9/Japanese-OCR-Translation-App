@@ -282,20 +282,32 @@ class Menu(QMainWindow):
             self.ui.scrollArea_2.widget().layout().addWidget(row_widget)
 
     def pick_image_and_extract_dataframe(self):
+        ShareData.image_path, df = None, None
         ShareData.image_path, df = pick_image_and_run_ocr(ShareData.username)
         if df is None:
             return
-
+        self.clear_widgets()
         self.display_image("./data/temp_image.jpg", self.ui.label_12)
         self.display_image("./out_image/showFinalImage.jpg", self.ui.Hasil_gambar)
         self.add_rows_from_dataframe(df)
         PageNavigator.GoToResult(self)
         self.show_yes_no_dialog()
 
+    def clear_widgets(self):
+        # Clear all the widgets in the scroll area
+        for i in reversed(range(self.ui.scrollArea_2.widget().layout().count())):
+            # Check if there are any widgets in the scroll area
+            if self.ui.scrollArea_2.widget().layout().itemAt(i).widget() == None:
+                return
+            widget = self.ui.scrollArea_2.widget().layout().itemAt(i).widget()
+            widget.deleteLater()
+
     def capture_image_and_extract_dataframe(self):
+        ShareData.image_path, df = None, None
         ShareData.image_path, df = capture_camera_ocr(ShareData.username)
         if df is None:
             return
+        self.clear_widgets()
         self.display_image("./data/temp_image.jpg", self.ui.label_12)
         self.display_image("./out_image/showFinalImage.jpg", self.ui.Hasil_gambar)
         self.add_rows_from_dataframe(df)

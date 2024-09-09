@@ -3,3 +3,7 @@ myvenv/
 
 #ignore pycache
 __pycache__/
+
+#ignore
+Generate exe/
+generate exe command.txt
